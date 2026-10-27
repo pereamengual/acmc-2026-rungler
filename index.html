@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11191b">
+  <meta name="description" content="An accessible browser-based preview of The Rungler workshop for ACMC 2026 at the University of Queensland. An interactive WebAudio/WebAssembly environment is in development.">
+  <title>The Rungler — ACMC 2026 Workshop</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="page">
+    <header class="site-header" aria-label="Workshop header">
+      <a class="brand" href="./" aria-label="The Rungler workshop home">
+        <span class="brand-mark" aria-hidden="true">R<span class="brand-dot">·</span></span>
+        <span>THE RUNGLER<br><small>ACMC 2026 / WORKSHOP</small></span>
+      </a>
+      <span class="header-meta">BRISBANE · 07—08 DECEMBER 2026</span>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> PUBLIC WORKSHOP PREVIEW · SYNTHESIS ENGINE IN DEVELOPMENT</p>
+          <h1 id="hero-heading">Feedback<br>as <em>instrument.</em></h1>
+          <p class="hero-intro">Exploring the Rungler, nonlinear modulation, and the creative possibilities of recursive electronic systems.</p>
+          <p class="hero-description">A 90-minute hands-on workshop inspired by Rob Hordijk’s instrument designs. Participants will investigate the transition from stochastic variation to clocked structures, nonlinear feedback, and cross-coupled synthesis.</p>
+          <div class="hero-tags" aria-label="Workshop requirements">
+            <span>90 MINUTES</span><span>WEB BROWSER</span><span>HEADPHONES</span><span>NO INSTALLATION</span>
+          </div>
+        </div>
+        <div class="schematic" aria-label="Conceptual diagram of two oscillators, a register and a feedback path; not a live simulation" role="img">
+          <div class="diagram-topline"><span>SYSTEM STUDY / 001</span><span>CONCEPTUAL SIGNAL FLOW</span></div>
+          <svg viewBox="0 0 500 420" aria-hidden="true" focusable="false">
+            <defs>
+              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#324045" stroke-width="0.6"/></pattern>
+            </defs>
+            <rect width="500" height="420" fill="url(#grid)" opacity=".6" />
+            <g fill="none" stroke="#7b9995" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M130 115 H215 V193 H260"/>
+              <path d="M370 115 H403 V193 H365"/>
+              <path d="M315 242 V295 H115 V168"/>
+              <path d="M315 295 H426 V115 H412" stroke-dasharray="6 7" />
+              <path d="M315 242 V338 H435" stroke="#dcefb1" />
+            </g>
+            <g fill="#172326" stroke="#aac7bd" stroke-width="1.8">
+              <circle cx="115" cy="115" r="48"/><circle cx="370" cy="115" r="48"/>
+              <rect x="260" y="169" width="105" height="73" rx="6"/>
+            </g>
+            <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
+              <text x="115" y="109" font-size="10" fill="#9cb2af">VCO A</text>
+              <text x="115" y="129" font-size="24" fill="#e0ebdb">∿</text>
+              <text x="370" y="109" font-size="10" fill="#9cb2af">VCO B</text>
+              <text x="370" y="129" font-size="24" fill="#e0ebdb">∿</text>
+              <text x="312" y="196" font-size="11" fill="#dcefb1">SHIFT</text>
+              <text x="312" y="214" font-size="11" fill="#dcefb1">REGISTER</text>
+              <text x="115" y="353" font-size="10" fill="#98b5a7">FEEDBACK</text>
+              <text x="429" y="357" font-size="10" fill="#dcefb1">CV</text>
+            </g>
+            <g fill="#dcefb1"><circle cx="215" cy="193" r="4"/><circle cx="315" cy="295" r="4"/><circle cx="426" cy="115" r="4" /></g>
+          </svg>
+          <div class="diagram-note">ILLUSTRATIVE ONLY <span>↗</span> NOT A RUNNING SYNTHESIS MODEL</div>
+        </div>
+      </section>
+
+      <section class="section intro" aria-labelledby="approach-heading">
+        <div class="section-header"><span class="section-index">01 / APPROACH</span><h2 id="approach-heading">Beyond fixed grids.</h2></div>
+        <div class="intro-grid"><p>What happens when a system’s behavior arises from its internal feedback rather than from an externally imposed sequence?</p><p>This workshop puts stochastic processes, sample-and-hold, deterministic feedback, and quantization side by side. The goal is to listen, observe, and ask what each architecture enables—and what it constrains.</p></div>
+      </section>
+
+      <section class="section" aria-labelledby="stages-heading">
+        <div class="section-header"><span class="section-index">02 / LEARNING PATH</span><h2 id="stages-heading">Six stages of exploration.</h2></div>
+        <p class="section-lead">The following modules describe the planned hands-on exercises. <strong>Interactive controls and sound generation are not yet enabled in this preview.</strong></p>
+        <ol class="stages">
+          <li><span class="stage-id">00A</span><div><h3>Continuous noise</h3><p>Unclocked stochastic variation as a point of comparison: fluctuating signals without an explicit stored state.</p></div><span class="stage-type">STOCHASTIC</span></li>
+          <li><span class="stage-id">00B</span><div><h3>Clocked sample &amp; hold</h3><p>Sampling, discrete steps, and an optional diatonic quantizer: where regularity enters the system.</p></div><span class="stage-type">CLOCKED</span></li>
+          <li><span class="stage-id">01</span><div><h3>The core Rungler</h3><p>Coupled oscillators, a shift register, feedback, and phase-space exploration of changing system behavior.</p></div><span class="stage-type">RECURSIVE</span></li>
+          <li><span class="stage-id">02</span><div><h3>PWM acoustic generation</h3><p>Comparator interference and pulse-width modulation as audible consequences of interacting control signals.</p></div><span class="stage-type">COMPARATOR</span></li>
+          <li><span class="stage-id">03</span><div><h3>Exciter &amp; resonator</h3><p>Routing complex excitation into the Twin Peak Filter to explore resonances and vocal-like spectral structures.</p></div><span class="stage-type">RESONANCE</span></li>
+          <li><span class="stage-id">04</span><div><h3>Blippoo Box architecture</h3><p>Two cross-coupled Rungler systems and recursive modulation across a larger instrument topology.</p></div><span class="stage-type">SYSTEM</span></li>
+        </ol>
+      </section>
+
+      <section class="section compatibility" aria-labelledby="compatibility-heading">
+        <div>
+          <span class="section-index">03 / TECHNICAL READINESS</span>
+          <h2 id="compatibility-heading">Browser compatibility.</h2>
+          <p>The eventual workshop will run in a modern browser through WebAudio and WebAssembly, without an installation. You can check whether the current browser exposes the required platform features.</p>
+          <p class="fine-print">This is a browser-capability check, not a test of the future RNBO patch or of access from the University of Queensland network. It produces no sound.</p>
+        </div>
+        <div class="test-panel">
+          <span class="panel-label">LOCAL ENVIRONMENT CHECK</span>
+          <button type="button" id="check-button">Check this browser <span aria-hidden="true">↗</span></button>
+          <div id="check-results" class="check-results" role="status" aria-live="polite"><p>Press the button to inspect browser capabilities. No downloads or permissions required.</p></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div><strong>THE RUNGLER</strong><span> A hands-on ACMC 2026 workshop</span></div>
+        <div>Pedro Trotz / Pere Amengual-Gomila <span> · Inspired by the work of Rob Hordijk</span></div>
+        <p>Hosted on GitHub Pages. This page is a project preview; it does not yet contain the interactive workshop engine.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
