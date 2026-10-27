@@ -24,7 +24,7 @@ Reference: https://docs.github.com/en/pages/getting-started-with-github-pages/co
 ## Structure
 
 - `index.html`: accessible English-language workshop landing page.
-- `styles.css`: responsive visual design without fonts, CDNs, external libraries, or images.
+- `styles.css`: responsive monochrome design aligned with pedrotrotz.com, with locally hosted Orbitron typography and no CDNs, external libraries, or images.
 - `app.js`: non-audio JavaScript browser capability check.
 - `.nojekyll`: prevents processing this static site through Jekyll.
 
@@ -32,4 +32,4 @@ Reference: https://docs.github.com/en/pages/getting-started-with-github-pages/co
 
 Create a modular interface for stages 0A, 0B, 1, 2, 3, and 4 with accessible knobs/switches, CV displays, waveform views and phase-space views. Establish a common parameter and visualization schema and validate it with participants' browsers. The actual DSP will be authored in Max/gen~ and exported through RNBO/WebAssembly, with explicit verification of audio startup, browser platform support, CPU load, and latency.
 
-No externally hosted scripts or fonts are required for this preview. The final WebAudio/RNBO version may have different requirements that must be tested separately.
+Orbitron is bundled in `fonts/Orbitron.woff2` under the SIL Open Font License (see `fonts/OFL.txt`). No externally hosted scripts or fonts are required for this preview. The final WebAudio/RNBO version may have different requirements that must be tested separately.

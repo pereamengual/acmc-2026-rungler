@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11191b">
+  <meta name="theme-color" content="#000000">
   <meta name="description" content="An accessible browser-based preview of The Rungler workshop for ACMC 2026 at the University of Queensland. An interactive WebAudio/WebAssembly environment is in development.">
   <title>The Rungler — ACMC 2026 Workshop</title>
+  <link rel="preload" href="./fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
 </head>
@@ -14,8 +15,7 @@
   <div class="page">
     <header class="site-header" aria-label="Workshop header">
       <a class="brand" href="./" aria-label="The Rungler workshop home">
-        <span class="brand-mark" aria-hidden="true">R<span class="brand-dot">·</span></span>
-        <span>THE RUNGLER<br><small>ACMC 2026 / WORKSHOP</small></span>
+        <span>PEDRO TROTZ<br><small>ACMC 2026 / WORKSHOP</small></span>
       </a>
       <span class="header-meta">BRISBANE · 07—08 DECEMBER 2026</span>
     </header>
@@ -24,48 +24,51 @@
       <section class="hero" aria-labelledby="hero-heading">
         <div class="hero-copy">
           <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> PUBLIC WORKSHOP PREVIEW · SYNTHESIS ENGINE IN DEVELOPMENT</p>
-          <h1 id="hero-heading">Feedback<br>as <em>instrument.</em></h1>
+          <h1 id="hero-heading">THE RUNGLER</h1>
+          <p class="hero-subtitle">Feedback as instrument.</p>
           <p class="hero-intro">Exploring the Rungler, nonlinear modulation, and the creative possibilities of recursive electronic systems.</p>
           <p class="hero-description">A 90-minute hands-on workshop inspired by Rob Hordijk’s instrument designs. Participants will investigate the transition from stochastic variation to clocked structures, nonlinear feedback, and cross-coupled synthesis.</p>
+          <a class="cta-button" href="#compatibility-heading">Check this browser <span aria-hidden="true">↗</span></a>
           <div class="hero-tags" aria-label="Workshop requirements">
             <span>90 MINUTES</span><span>WEB BROWSER</span><span>HEADPHONES</span><span>NO INSTALLATION</span>
           </div>
         </div>
+
+      </section>
+
+      <section class="section intro" aria-labelledby="approach-heading">
         <div class="schematic" aria-label="Conceptual diagram of two oscillators, a register and a feedback path; not a live simulation" role="img">
           <div class="diagram-topline"><span>SYSTEM STUDY / 001</span><span>CONCEPTUAL SIGNAL FLOW</span></div>
           <svg viewBox="0 0 500 420" aria-hidden="true" focusable="false">
             <defs>
-              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#324045" stroke-width="0.6"/></pattern>
+              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#252525" stroke-width="0.6"/></pattern>
             </defs>
             <rect width="500" height="420" fill="url(#grid)" opacity=".6" />
-            <g fill="none" stroke="#7b9995" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <g fill="none" stroke="#888888" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
               <path d="M130 115 H215 V193 H260"/>
               <path d="M370 115 H403 V193 H365"/>
               <path d="M315 242 V295 H115 V168"/>
               <path d="M315 295 H426 V115 H412" stroke-dasharray="6 7" />
-              <path d="M315 242 V338 H435" stroke="#dcefb1" />
+              <path d="M315 242 V338 H435" stroke="#ffffff" />
             </g>
-            <g fill="#172326" stroke="#aac7bd" stroke-width="1.8">
+            <g fill="#000000" stroke="#aaaaaa" stroke-width="1.8">
               <circle cx="115" cy="115" r="48"/><circle cx="370" cy="115" r="48"/>
               <rect x="260" y="169" width="105" height="73" rx="6"/>
             </g>
             <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
-              <text x="115" y="109" font-size="10" fill="#9cb2af">VCO A</text>
-              <text x="115" y="129" font-size="24" fill="#e0ebdb">∿</text>
-              <text x="370" y="109" font-size="10" fill="#9cb2af">VCO B</text>
-              <text x="370" y="129" font-size="24" fill="#e0ebdb">∿</text>
-              <text x="312" y="196" font-size="11" fill="#dcefb1">SHIFT</text>
-              <text x="312" y="214" font-size="11" fill="#dcefb1">REGISTER</text>
-              <text x="115" y="353" font-size="10" fill="#98b5a7">FEEDBACK</text>
-              <text x="429" y="357" font-size="10" fill="#dcefb1">CV</text>
+              <text x="115" y="109" font-size="10" fill="#a0a0a0">VCO A</text>
+              <text x="115" y="129" font-size="24" fill="#e0e0e0">∿</text>
+              <text x="370" y="109" font-size="10" fill="#a0a0a0">VCO B</text>
+              <text x="370" y="129" font-size="24" fill="#e0e0e0">∿</text>
+              <text x="312" y="196" font-size="11" fill="#ffffff">SHIFT</text>
+              <text x="312" y="214" font-size="11" fill="#ffffff">REGISTER</text>
+              <text x="115" y="353" font-size="10" fill="#a0a0a0">FEEDBACK</text>
+              <text x="429" y="357" font-size="10" fill="#ffffff">CV</text>
             </g>
-            <g fill="#dcefb1"><circle cx="215" cy="193" r="4"/><circle cx="315" cy="295" r="4"/><circle cx="426" cy="115" r="4" /></g>
+            <g fill="#ffffff"><circle cx="215" cy="193" r="4"/><circle cx="315" cy="295" r="4"/><circle cx="426" cy="115" r="4" /></g>
           </svg>
           <div class="diagram-note">ILLUSTRATIVE ONLY <span>↗</span> NOT A RUNNING SYNTHESIS MODEL</div>
         </div>
-      </section>
-
-      <section class="section intro" aria-labelledby="approach-heading">
         <div class="section-header"><span class="section-index">01 / APPROACH</span><h2 id="approach-heading">Beyond fixed grids.</h2></div>
         <div class="intro-grid"><p>What happens when a system’s behavior arises from its internal feedback rather than from an externally imposed sequence?</p><p>This workshop puts stochastic processes, sample-and-hold, deterministic feedback, and quantization side by side. The goal is to listen, observe, and ask what each architecture enables—and what it constrains.</p></div>
       </section>
