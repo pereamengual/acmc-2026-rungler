@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Rungler laboratory: a live, readable AudioWorklet engine for exploring noise, sample &amp; hold, the Rungler, PWM and the Twin Peak.">
+  <title>The Rungler / Laboratory — ACMC 2026</title>
+  <script>
+    // Apply the saved light/dark choice before the page paints (no flash).
+    try { const t = localStorage.getItem('rungler-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
+  </script>
+  <link rel="preload" href="../fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./lab.css">
+  <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
+  <div class="lab-shell">
+
+    <!-- TOP BAR: identity, engine state and the audio controls, in one row -->
+    <header class="top-bar">
+      <a class="brand" href="../">THE RUNGLER <span>LAB · ACMC 2026</span></a>
+      <p class="status-chip" id="engine-chip">ENGINE READY<br><span>Audio stopped</span></p>
+      <section class="audio-bar" aria-label="Audio controls" aria-describedby="audio-status">
+        <button id="audio-start" type="button">START AUDIO</button>
+        <button id="audio-mute" type="button" aria-pressed="false" disabled>MUTE</button>
+        <label class="master" for="master-level">LEVEL
+          <input id="master-level" type="range" min="0" max="1" step="0.01" value="0.4" aria-describedby="audio-status">
+          <output id="master-level-value" for="master-level"></output>
+        </label>
+        <button id="audio-panic" class="panic" type="button" disabled>PANIC</button>
+      </section>
+    </header>
+    <p id="audio-status" class="audio-status" role="status">Nothing sounds until you press START AUDIO.</p>
+
+    <nav class="stage-nav" aria-label="Laboratory stages" id="stage-navigation"></nav>
+
+    <main id="workspace" aria-labelledby="stage-title" tabindex="-1">
+      <!-- STAGE: what it is, in two lines -->
+      <div class="stage-header">
+        <div class="stage-heading">
+          <p id="stage-category" class="eyebrow"></p>
+          <h1 id="stage-title"></h1>
+        </div>
+        <p id="stage-description" class="stage-description"></p>
+        <button id="reset-stage" type="button">Reset stage</button>
+      </div>
+      <p id="stage-engine-note" class="stage-engine-note"></p>
+
+      <!-- INSTRUMENT: all the controls next to all the indicators -->
+      <div class="instrument">
+        <section class="panel controls-panel" aria-label="Stage controls">
+          <h2 class="panel-title">Controls</h2>
+          <div id="parameters" class="parameter-grid"></div>
+        </section>
+        <section class="panel indicators-panel" aria-label="Chaos and entropy indicators">
+          <div id="indicators"></div>
+        </section>
+      </div>
+
+      <!-- MONITORS: everything drawn from the running engine -->
+      <section class="monitors" aria-labelledby="monitors-title">
+        <h2 id="monitors-title" class="panel-title">Monitors <span>live engine data · didactic model, not hardware measurements</span></h2>
+        <div id="plots" class="plot-grid"></div>
+      </section>
+      <p id="lab-announcement" class="sr-only" role="status"></p>
+      <noscript><p class="noscript">JavaScript is required for the laboratory and its audio engine. Return to the <a href="../">workshop preview</a>.</p></noscript>
+    </main>
+
+    <!-- FOOTER: the stage as a block diagram -->
+    <footer class="lab-footer">
+      <section class="diagram-section" aria-labelledby="diagram-title">
+        <div class="diagram-header">
+          <h2 id="diagram-title" class="panel-title">Signal flow <span id="diagram-stage"></span></h2>
+          <ul class="diagram-legend" aria-label="Line types">
+            <li><svg viewBox="0 0 40 8" aria-hidden="true"><line class="wire wire-audio" x1="0" y1="4" x2="40" y2="4"/></svg>audio</li>
+            <li><svg viewBox="0 0 40 8" aria-hidden="true"><line class="wire wire-cv" x1="0" y1="4" x2="40" y2="4"/></svg>control voltage</li>
+            <li><svg viewBox="0 0 40 8" aria-hidden="true"><line class="wire wire-logic" x1="0" y1="4" x2="40" y2="4"/></svg>clock &amp; bits</li>
+          </ul>
+        </div>
+        <div id="block-diagram" class="diagram-scroll"></div>
+        <p id="diagram-empty" class="diagram-empty" hidden>The block diagram appears when this stage has an engine.</p>
+      </section>
+      <!-- NOTES: how to read this stage, at the bottom so the diagram comes first (filled from js/notes.js) -->
+      <section id="about-indicators" class="notes" aria-labelledby="notes-title">
+        <h2 id="notes-title" class="panel-title">How to read this stage</h2>
+        <div id="stage-notes"></div>
+      </section>
+    </footer>
+  </div>
+
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode">☀</button>
+</body>
+</html>

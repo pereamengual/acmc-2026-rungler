@@ -1,35 +1,43 @@
 # The Rungler — ACMC 2026 Workshop
 
-Public **placeholder / workshop preview** for an upcoming hands-on workshop on nonlinear modulation, feedback, and the instrument designs of Rob Hordijk.
+A public workshop preview and a separate laboratory (`/lab/`) inspired by Rob Hordijk's instrument architectures.
 
-**Status:** static preview only. It does **not** yet implement any sonic model, Rungler behavior, waveform display, CV visualization, or RNBO export. The on-page browser check inspects platform capabilities; it is not a test of workshop audio functionality.
+**Status (Phase 2, work in progress):** the landing page is a static preview. `/lab/` runs a plain-JavaScript AudioWorklet engine with six stages of growing complexity — 0a continuous noise, 0b clocked sample & hold, 1 the core Rungler (three steps), 2 PWM by comparator, 3 exciter and Twin Peak, 4 Blippoo Box architecture (three steps) — with live monitors, block diagrams and chaos/entropy indicators. These are didactic functional models of the block diagrams, not circuit emulations or hardware measurements. No RNBO export is used.
 
-## Intended public address
+## Addresses
 
-`https://pereamengual.github.io/acmc-2026-rungler/`
+- Published landing page: https://pereamengual.github.io/acmc-2026-rungler/
+- Repository: https://github.com/pereamengual/acmc-2026-rungler
+- Local lab: http://127.0.0.1:8766/lab/
+- Lab address once merged into `main`: https://pereamengual.github.io/acmc-2026-rungler/lab/
 
-This address will only become available after the repository is created and GitHub Pages is enabled.
+Phase 2 is developed on its own branch; GitHub Pages publishes the root of `main` (with `.nojekyll`), so the lab goes public only when that branch is merged.
 
-## Publish with GitHub Pages
+## Local development and checks
 
-1. Create a **public** GitHub repository named `acmc-2026-rungler` under `pereamengual`. Initialize it with **no** README or template files (the project already contains `README.md`).
-2. Upload all files from this directory **at the root of the repository** (not in an enclosing `acmc-2026-rungler` subfolder). You can select the files in GitHub's **Add file → Upload files** page, or use GitHub Desktop.
-3. In the repository, select **Settings → Pages → Build and deployment → Source: Deploy from a branch**.
-4. Choose **main** and **/(root)**, then **Save**.
-5. Once deployment has completed, use the **Visit site** link under Settings → Pages and inspect the proposed URL.
-6. Verify it from an independent connection (mobile data, a VPN exit location, and—ideally—a University of Queensland campus contact). Successful accessibility from one location does not guarantee campus access.
+Requires Node ≥20 for development only; no dependencies to install.
 
-Reference: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+```sh
+npm run serve
+npm test
+npm run check
+```
+
+Open the local lab URL and press START AUDIO (start with the level low; headphones recommended). Switch stages with the six tabs. Knobs work with mouse/touch (Shift for fine steps) or keyboard; double-click restores a knob's default. Knob values are kept in this browser between visits (never the master level); Reset stage restores the current stage.
 
 ## Structure
 
-- `index.html`: accessible English-language workshop landing page.
-- `styles.css`: responsive monochrome design aligned with pedrotrotz.com, with locally hosted Orbitron typography and no CDNs, external libraries, or images.
-- `app.js`: non-audio JavaScript browser capability check.
-- `.nojekyll`: prevents processing this static site through Jekyll.
+- `index.html`, `styles.css`, `app.js`: existing workshop preview and browser capability checker; only a lab link was added to the landing page.
+- `fonts/`: local Orbitron font and SIL Open Font License (`OFL.txt`).
+- `lab/`: independent semantic document, monochrome styles and native ES modules.
+- `lab/js/dsp/`: the AudioWorklet engine — `modules/` (oscillator, shift register, DACs, comparator, filters, Rungler, Blippoo core…) and `patches/` (one file per stage).
+- `lab/js/analysis/`: entropy/complexity, register period, event map and twin divergence.
+- `lab/js/components/`: controls, monitors, indicators and block diagrams.
+- `lab/js/core/`: declarative parameter registry, parameter store, conditions and saved settings.
+- `lab/js/adapters/`: offline RNBO facade and future engine-port boundary.
+- `tests/`: dependency-free Node tests.
+- `tools/`: syntax checker and loopback-only preview server.
+- `AGENTS.md`: project architecture, scientific scope and verification rules.
+- [docs/architecture.md](docs/architecture.md): baseline, decisions, UI/engine contract and integration limits.
 
-## Planned next phase — only after public accessibility is confirmed
-
-Create a modular interface for stages 0A, 0B, 1, 2, 3, and 4 with accessible knobs/switches, CV displays, waveform views and phase-space views. Establish a common parameter and visualization schema and validate it with participants' browsers. The actual DSP will be authored in Max/gen~ and exported through RNBO/WebAssembly, with explicit verification of audio startup, browser platform support, CPU load, and latency.
-
-Orbitron is bundled in `fonts/Orbitron.woff2` under the SIL Open Font License (see `fonts/OFL.txt`). No externally hosted scripts or fonts are required for this preview. The final WebAudio/RNBO version may have different requirements that must be tested separately.
+No CDN, external UI library, build system or runtime package is used. Access from University of Queensland networks still requires independent confirmation. Testing so far has used a Chromium-based browser; Firefox and Safari are still to be checked.

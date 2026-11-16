@@ -1,0 +1,227 @@
+/* THE RUNGLER LAB — styles
+   Order: colours (dark and light) · base · top bar · stage tabs · stage header ·
+          instrument (controls + indicators) · knobs and other controls · monitors ·
+          footer · theme switch · small screens */
+
+@font-face { font-family: Orbitron; src: url('../fonts/Orbitron.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+
+/* ── Colours ── dark is the default; light follows the system unless the switch chose. */
+:root {
+  color-scheme: dark;
+  --bg: #000; --panel: #070707; --line: #2c2c2c; --line-strong: #555;
+  --ink: #eeeeee; --text: #d6d6d6; --muted: #9a9a9a; --dim: #8a8a8a;
+  --grid: #232323; --fade: rgba(0, 0, 0, 0.18); --invert-bg: #eee; --invert-ink: #000;
+  --title: Orbitron, 'SF Mono', Menlo, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #e4e0d6; --panel: #ebe7de; --line: #c8c3b7; --line-strong: #8a857a;
+  --ink: #1c1b19; --text: #2e2c29; --muted: #5c5850; --dim: #6b675e;
+  --grid: #d9d4c9; --fade: rgba(235, 231, 222, 0.2); --invert-bg: #1c1b19; --invert-ink: #e4e0d6;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: #e4e0d6; --panel: #ebe7de; --line: #c8c3b7; --line-strong: #8a857a;
+    --ink: #1c1b19; --text: #2e2c29; --muted: #5c5850; --dim: #6b675e;
+    --grid: #d9d4c9; --fade: rgba(235, 231, 222, 0.2); --invert-bg: #1c1b19; --invert-ink: #e4e0d6;
+  }
+}
+
+/* ── Base ── */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, sans-serif; }
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+button { min-height: 36px; padding: 6px 14px; background: transparent; border: 1px solid var(--line-strong); border-radius: 2px; cursor: pointer; font: 10px/1.4 var(--title); letter-spacing: .04em; }
+button:hover:enabled { background: var(--invert-bg); color: var(--invert-ink); }
+button:disabled { cursor: not-allowed; opacity: .45; }
+h1, h2 { font-family: var(--title); font-weight: 400; margin: 0; color: var(--ink); }
+.eyebrow { font: 9px/1.6 var(--title); letter-spacing: .08em; color: var(--muted); margin: 0; }
+.lab-shell { max-width: 1600px; margin: 0 auto; padding: 0 clamp(12px, 2vw, 28px); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.skip-link { position: absolute; top: -100px; left: 20px; background: var(--invert-bg); color: var(--invert-ink); padding: 8px; z-index: 10; }
+.skip-link:focus { top: 10px; }
+.noscript { padding: 16px; border: 1px solid var(--ink); }
+
+/* ── Top bar ── */
+.top-bar { display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.brand { font: 14px/1.3 var(--title); color: var(--ink); text-decoration: none; }
+.brand span { display: block; font-size: 8px; color: var(--muted); letter-spacing: .06em; }
+.status-chip { margin: 0; font: 9px/1.5 var(--title); border: 1px solid var(--line); padding: 5px 10px; color: var(--ink); }
+.status-chip span { font: 11px/1.4 system-ui, sans-serif; color: var(--muted); }
+.audio-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+.master { display: flex; align-items: center; gap: 8px; font: 9px var(--title); }
+.master input { width: 130px; accent-color: var(--ink); }
+.master output { font: 11px monospace; color: var(--muted); min-width: 64px; }
+.audio-status { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.audio-status:empty { display: none; }
+
+/* ── Stage tabs: one row ── */
+.stage-nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 10px 0; border: 1px solid var(--line); }
+.stage-link { display: flex; align-items: baseline; gap: 8px; padding: 7px 10px; border-right: 1px solid var(--line); color: var(--muted); font-size: 12px; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 36px; }
+.stage-link:last-child { border-right: 0; }
+.stage-link:hover { color: var(--ink); background: var(--panel); }
+.stage-link[aria-current] { background: var(--invert-bg); color: var(--invert-ink); }
+.stage-number { font: 13px var(--title); flex-shrink: 0; }
+.stage-nav-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── Stage header ── */
+.stage-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; margin-bottom: 10px; }
+.stage-header h1 { font-size: 17px; white-space: nowrap; }
+.stage-description { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.45; max-width: 980px; }
+.stage-engine-note:empty { display: none; }
+.stage-engine-note { border: 1px dashed var(--line-strong); padding: 6px 12px; color: var(--ink); font-size: 12px; margin: 0 0 10px; }
+
+/* ── Instrument: controls and indicators side by side ── */
+.instrument { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 430px); gap: 12px; align-items: stretch; }
+.panel { border: 1px solid var(--line); background: var(--panel); padding: 10px 12px; min-width: 0; }
+.panel-title { font-size: 11px; letter-spacing: .04em; margin-bottom: 8px; }
+.panel-title span { font: 11px system-ui, sans-serif; color: var(--muted); letter-spacing: 0; margin-left: 8px; }
+.parameter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px 8px; }
+/* A titled box of controls that belong together (e.g. Sine Oscillator: amount and centre). */
+.control-group { grid-column: span var(--span, 2); position: relative; border: 1px solid var(--line-strong); padding: 0 6px 8px; min-width: 0; }
+.control-group[hidden] { display: none; }
+/* the title sits on the top border, like a legend, so the knobs stay level with their neighbours */
+.control-group-title { position: absolute; top: -6px; left: 8px; padding: 0 4px; background: var(--panel); font: 9.5px/1 var(--title); color: var(--muted); letter-spacing: .04em; }
+.control-group-body { display: grid; grid-template-columns: repeat(var(--span, 2), minmax(0, 1fr)); gap: 10px 8px; }
+
+/* ── Controls ── */
+.parameter-control { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+.parameter-label { font-size: 11px; line-height: 1.25; text-align: center; color: var(--text); min-height: 28px; display: flex; align-items: flex-end; justify-content: center; cursor: default; }
+/* Value row: the value box stays centred under the knob; on clock knobs the LED sits just
+   left of it (6 px away), outside the centring. */
+.value-row { position: relative; display: flex; }
+.clock-led { position: absolute; right: calc(100% + 6px); top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; }
+.clock-led.is-on { background: var(--ink); border-color: var(--ink); box-shadow: 0 0 6px var(--ink); }
+.clock-led.is-steady { background: var(--ink); border-color: var(--ink); opacity: .65; }
+.value-box { font: 11px/1.4 var(--title); color: var(--ink); border: 1px solid var(--line-strong); padding: 2px 6px; min-width: 76px; text-align: center; white-space: nowrap; }
+
+/* Knob: the face is the slider; min and max sit under the two ends of the arc. */
+.knob-body { position: relative; width: 84px; height: 72px; }
+.knob-face { width: 72px; height: 72px; display: block; margin: 0 auto; touch-action: none; cursor: grab; border-radius: 50%; }
+.knob-face:active { cursor: grabbing; }
+.knob-track, .knob-arc { fill: none; stroke-width: 6; stroke-linecap: round; }
+.knob-track { stroke: var(--line); }
+.knob-arc { stroke: var(--ink); }
+.knob-cap { fill: var(--panel); stroke: var(--line-strong); stroke-width: 1.5; }
+.knob-pointer { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+/* No ring around a focused knob; keyboard focus shows as a thicker cap edge instead. */
+.knob-face:focus { outline: none; }
+.knob-face:focus-visible .knob-cap { stroke: var(--ink); stroke-width: 3; }
+.knob-min, .knob-max { position: absolute; bottom: -2px; font: 9px/1 monospace; color: var(--muted); white-space: nowrap; }
+.knob-min { left: -6px; }
+.knob-max { right: -6px; }
+
+/* Switch and selector, sized to sit in the same row as the knobs. */
+.toggle-input { appearance: none; width: 52px; height: 30px; margin: 21px 0; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 2px; cursor: pointer; position: relative; }
+.toggle-input::before { content: ''; position: absolute; width: 20px; height: 20px; top: 4px; left: 4px; background: var(--line-strong); transition: left .12s; }
+.toggle-input:checked::before { left: 26px; background: var(--ink); }
+/* Selector: all choices visible, stacked; spans two columns of the control grid. */
+.select-control { grid-column: span 2; align-items: stretch; }
+.choice-group { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.choice-group legend { width: 100%; padding: 0; margin-bottom: 4px; }
+.choice { position: relative; display: block; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.choice span { display: block; border: 1px solid var(--line-strong); border-radius: 2px; padding: 3px 8px; font-size: 11.5px; line-height: 1.35; color: var(--text); background: var(--bg); }
+.choice:hover span { border-color: var(--ink); }
+.choice input:checked + span { background: var(--invert-bg); color: var(--invert-ink); border-color: var(--invert-bg); }
+.choice input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* ── Indicators (inside the instrument row) ── */
+/* The panel is as tall as the controls beside it: the H–C plane fills the left half as a
+   square, the readings sit centred in the right half. */
+.indicators-panel { display: flex; flex-direction: column; }
+.indicators-panel .plot { border: 0; padding: 0; background: none; flex: 1; display: flex; flex-direction: column; }
+.indicators .plot-heading { margin-bottom: 6px; justify-content: flex-start; }
+.indicators .plot-heading > span:first-child { margin-right: auto; }
+/* The readings column has a fixed width, so a longer value ("never (> 1000 clocks)") wraps
+   instead of squeezing the plane. */
+.indicator-layout { flex: 1; display: grid; grid-template-columns: minmax(150px, 1fr) 112px; gap: 14px; align-items: center; }
+.hc-plane { width: 100%; max-width: 320px; aspect-ratio: 1; height: auto !important; justify-self: center; }
+/* `contain: size`: the readings never decide the height of the panel — the plane does. */
+.indicator-list { margin: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px; contain: size; align-self: stretch; }
+.indicator-list dt { font: 10px var(--title); color: var(--muted); }
+.indicator-list dt[hidden], .indicator-list dd[hidden] { display: none; }
+.indicator-list dd { margin: 3px 0 0; }
+.indicator-value { font: 15px/1.3 var(--title); color: var(--ink); }
+.indicator-list dt, .indicator-main, .indicator-status { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.indicator-main { height: 1.3em; }
+.indicator-status { font: 9.5px/1.4 var(--title); color: var(--muted); height: 1.4em; }
+.indicator-help { margin: 1px 0 0; color: var(--muted); font-size: 11px; line-height: 1.35; }
+.indicators .plot-note { margin-top: 8px; }
+
+/* ── Monitors ── */
+.monitors { margin: 12px 0 0; }
+.plot-grid { display: grid; grid-template-columns: repeat(var(--columns, 3), minmax(0, 1fr)); gap: 10px; }
+.plot[hidden], .monitors[hidden], .panel[hidden], .notes[hidden], .parameter-control[hidden] { display: none; }
+.instrument:has(.indicators-panel[hidden]) { grid-template-columns: 1fr; }
+.plot { border: 1px solid var(--line); background: var(--panel); padding: 8px 10px; margin: 0; min-width: 0; }
+.plot-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; font: 10.5px var(--title); color: var(--ink); margin-bottom: 6px; }
+.plot-badge { color: var(--muted); font: 9px monospace; letter-spacing: .08em; }
+.plot canvas { display: block; width: 100%; height: 150px; }
+.plot-note { color: var(--muted); font: 10.5px/1.4 monospace; margin: 6px 0 0; }
+
+/* ── Footer ── */
+.lab-footer { margin-top: 16px; padding: 12px 0 60px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--muted); }
+
+/* ── Notes: how to read the indicators ── */
+.notes { margin-top: 14px; border: 1px solid var(--line); background: var(--panel); padding: 10px 12px; }
+.notes details { border-top: 1px solid var(--line); padding: 6px 0; }
+.notes details:first-of-type { border-top: 0; }
+.notes summary { cursor: pointer; font: 10.5px/1.6 var(--title); color: var(--ink); }
+.notes p { margin: 6px 0 4px; color: var(--text); font-size: 12.5px; max-width: 980px; }
+
+/* ── Block diagram ── */
+.diagram-section { display: flex; flex-direction: column; gap: 6px; }
+.diagram-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px 16px; }
+.diagram-header .panel-title { margin: 0; }
+.diagram-legend { display: flex; gap: 16px; list-style: none; margin: 0; padding: 0; font-size: 11px; color: var(--muted); }
+.diagram-legend li { display: flex; align-items: center; gap: 6px; }
+.diagram-legend svg { width: 40px; height: 8px; }
+.diagram-scroll { overflow-x: auto; border: 1px solid var(--line); background: var(--panel); padding: 6px; }
+.block-diagram { display: block; width: 100%; min-width: 760px; height: auto; }
+.wire { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.wire-cv { stroke-dasharray: 7 4; }
+.wire-logic { stroke-dasharray: 1.5 3.5; stroke-linecap: round; stroke-width: 2; }
+.wire-halo { fill: none; stroke: var(--panel); stroke-width: 6; }
+.diagram-arrow { fill: var(--ink); }
+.diagram-group { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 2 4; }
+.group-label { font: 9px monospace; letter-spacing: .08em; fill: var(--muted); }
+.diagram-block rect { fill: var(--bg); stroke: var(--line-strong); stroke-width: 1.2; }
+.block-label { font: 10px monospace; letter-spacing: .03em; fill: var(--ink); text-anchor: middle; }
+.block-link { font: 9px monospace; fill: var(--muted); text-anchor: middle; text-decoration: underline; }
+.block-diagram a:hover .block-link, .block-diagram a:focus .block-link { fill: var(--ink); }
+.wire-label { font: 9px monospace; fill: var(--muted); text-anchor: middle; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; }
+.diagram-empty { margin: 0; color: var(--muted); }
+.block-diagram .is-inactive { opacity: .2; }
+
+/* ── Theme switch, bottom right ── */
+.theme-toggle { position: fixed; right: 16px; bottom: 16px; width: 44px; height: 44px; padding: 0; border-radius: 50%; font: 18px/1 system-ui, sans-serif; background: var(--panel); color: var(--ink); border-color: var(--line-strong); z-index: 20; }
+
+/* ── Smaller screens ── */
+@media (max-width: 1100px) {
+  .instrument { grid-template-columns: 1fr; }
+  .plot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 760px) {
+  .stage-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stage-link:nth-child(3) { border-right: 0; }
+  .stage-link:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .stage-header { grid-template-columns: 1fr auto; }
+  .stage-description { grid-column: 1 / -1; grid-row: 2; }
+  .audio-bar { margin-left: 0; }
+  .parameter-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+}
+@media (max-width: 520px) {
+  .plot-grid { grid-template-columns: 1fr !important; }
+  .indicator-layout { grid-template-columns: 1fr; }
+  .indicator-list { contain: none; }
+  .hc-plane { max-width: 240px; }
+  .master input { width: 100px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (forced-colors: active) { .knob-face { forced-color-adjust: none; } .toggle-input { appearance: auto; } .toggle-input::before { display: none; } }
+
+/* ── Settings window (copy / paste) ── */

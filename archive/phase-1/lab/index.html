@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="The Rungler laboratory: Phase 1 interface preview. Optional illustrative graphics, no synthesis engine or audio.">
+  <title>The Rungler / Laboratory — ACMC 2026</title>
+  <link rel="preload" href="../fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./lab.css">
+  <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
+  <div class="lab-shell">
+    <header class="lab-header">
+      <a class="brand" href="../">PEDRO TROTZ <span>THE RUNGLER / ACMC 2026</span></a>
+      <a class="back-link" href="../">Workshop preview ↗</a>
+    </header>
+    <main>
+      <div class="lab-intro">
+        <div><p class="eyebrow">PHASE 1 / INTERFACE STUDY</p><h1>The Rungler <span>laboratory.</span></h1></div>
+        <p class="status-chip">ENGINE NOT CONNECTED<br><span>No audio available</span></p>
+      </div>
+      <p class="intro-note">Explore the interface and its control relationships. Parameters are provisional. This preview contains no synthesis engine, circuit emulation or scientific measurements.</p>
+      <section class="global-panel" aria-label="Global audio controls" aria-describedby="audio-status">
+        <div class="audio-buttons"><button disabled type="button">START AUDIO</button><button disabled type="button">MUTE</button></div>
+        <div class="master"><label for="master-level">MASTER LEVEL</label><input id="master-level" type="range" min="0" max="1" step="0.01" value="0" disabled aria-describedby="audio-status"><output for="master-level">0 · unavailable</output></div>
+        <button class="panic" type="button" disabled>PANIC</button>
+        <p id="audio-status">Unavailable until a real engine and its audio safety lifecycle are integrated.</p>
+      </section>
+      <nav class="stage-nav" aria-label="Laboratory stages" id="stage-navigation"></nav>
+      <section id="workspace" aria-labelledby="stage-title" tabindex="-1">
+        <div class="workspace-header"><div><p id="stage-category" class="eyebrow"></p><h2 id="stage-title"></h2></div><button id="reset-stage" type="button">Reset this stage</button></div>
+        <p id="stage-description" class="stage-description"></p>
+        <div class="workspace-layout">
+          <section class="controls-panel" aria-label="Stage parameters"><div class="panel-topline"><h3>Control surface</h3><span>REQUESTED UI VALUES</span></div><div id="parameters" class="parameter-grid"></div><p class="control-help">Drag a dial up/right or use its slider with mouse or touch. Keyboard: Tab to a control, arrows to adjust; Home/End for limits. Space toggles a switch.</p></section>
+          <aside class="signal-panel" aria-labelledby="signal-title"><p class="eyebrow">PREPARED FOR RNBO / WASM</p><h3 id="signal-title">A separate engine.</h3><p>Controls update a shared parameter store. The adapter will translate stable UI IDs to a reviewed RNBO export.</p><div class="signal-flow" aria-label="Interface to parameter store to RNBO adapter to future engine"><span>INTERFACE</span><span aria-hidden="true">↓</span><span>PARAMETER STORE</span><span aria-hidden="true">↓</span><span>RNBO ADAPTER</span><span aria-hidden="true">↓</span><span class="future-engine">FUTURE ENGINE / OFFLINE</span></div><p class="signal-footnote">No audio context is created.<br>No RNBO runtime is downloaded.</p></aside>
+        </div>
+        <section class="visuals-section" aria-labelledby="visuals-title">
+          <div class="visuals-header"><div><p class="eyebrow">ILLUSTRATIVE / NO AUDIO</p><h3 id="visuals-title">Visual workbench</h3></div><label class="demo-switch" for="graphic-demo"><input id="graphic-demo" type="checkbox" role="switch"><span>Simulated graphic demo</span></label></div>
+          <p id="demo-status" role="status">Demo off. Displays have no engine data.</p>
+          <p class="demo-disclaimer">When enabled, all four views show fabricated drawing patterns in arbitrary units. They are not Rungler output, an FFT, control-voltage measurements or evidence of dynamical behavior. The first knob changes drawing size only.</p>
+          <div id="plots" class="plot-grid"></div>
+        </section>
+      </section>
+      <p id="lab-announcement" class="sr-only" role="status"></p>
+      <noscript><p class="noscript">JavaScript is required for the control surface. This preview has no audio. Return to the <a href="../">workshop preview</a>.</p></noscript>
+    </main>
+    <footer>THE RUNGLER / ACMC 2026 <span>Phase 1 · Interface only · No sound generation</span><a href="../docs/architecture.md">Architecture & engine contract ↗</a></footer>
+  </div>
+</body>
+</html>
