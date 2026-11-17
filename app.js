@@ -68,3 +68,30 @@ toneButton.addEventListener("click", async () => {
     toneStatus.textContent = "The browser did not allow sound. Check that the tab is not muted and try again.";
   }
 });
+
+// ── Light/dark switch (bottom right), shared with the lab through the same saved key ──
+// With no choice saved, the page follows the system setting.
+const themeButton = document.getElementById("theme-toggle");
+const THEME_KEY = "rungler-theme";
+const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+
+function currentTheme() {
+  const chosen = document.documentElement.dataset.theme;
+  if (chosen === "light" || chosen === "dark") return chosen;
+  return systemLight.matches ? "light" : "dark";
+}
+
+function showTheme() {
+  const dark = currentTheme() === "dark";
+  themeButton.textContent = dark ? "☀" : "☾";
+  themeButton.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+}
+
+themeButton.addEventListener("click", () => {
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem(THEME_KEY, next); } catch (_) { /* private mode: the choice lasts this visit */ }
+  showTheme();
+});
+systemLight.addEventListener("change", showTheme);
+showTheme();

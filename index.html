@@ -3,11 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#e4e0d6" media="(prefers-color-scheme: light)">
   <meta name="description" content="The Rungler: a hands-on ACMC 2026 workshop on noise, clocks, feedback and Rob Hordijk's instruments. Check your browser, read about the workshop, then open the laboratory.">
   <title>The Rungler — ACMC 2026 Workshop</title>
   <link rel="preload" href="./fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./styles.css">
+  <script>
+    // Apply the saved light/dark choice before the page paints (shared with the lab).
+    try { const t = localStorage.getItem('rungler-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (_) {}
+  </script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -73,23 +78,23 @@
             <div class="diagram-topline"><span>SYSTEM STUDY / 001</span><span>CONCEPTUAL SIGNAL FLOW</span></div>
             <svg viewBox="0 0 640 400" aria-hidden="true" focusable="false">
               <defs>
-                <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#252525" stroke-width="0.6"/></pattern>
+                <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path class="sv-grid" d="M 24 0 L 0 0 0 24" fill="none" stroke-width="0.6"/></pattern>
                 <marker id="signal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M1 1 L9 5 L1 9" fill="none" stroke="#888888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="sv-arrow" d="M1 1 L9 5 L1 9" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </marker>
                 <marker id="cv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M1 1 L9 5 L1 9" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="sv-arrow-strong" d="M1 1 L9 5 L1 9" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </marker>
               </defs>
               <rect width="640" height="400" fill="url(#grid)" opacity=".6"/>
-              <g fill="#000000" stroke="#aaaaaa" stroke-width="1.8">
+              <g class="sv-nodes" stroke-width="1.8">
                 <circle cx="105" cy="110" r="43"/>
                 <circle cx="105" cy="270" r="43"/>
                 <rect x="195" y="90" width="50" height="40" rx="6"/>
                 <rect x="285" y="85" width="120" height="50" rx="6"/>
                 <rect x="460" y="85" width="100" height="50" rx="6"/>
               </g>
-              <g fill="none" stroke="#888888" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#signal-arrow)">
+              <g class="sv-wires" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#signal-arrow)">
                 <!-- DATA: OSC1 square → XOR → register. CLOCK: OSC2 → register, from below. -->
                 <path d="M148 110 H195"/>
                 <path d="M245 110 H285"/>
@@ -100,29 +105,29 @@
                 <!-- the DAC voltage returns around the perimeter to both oscillators -->
                 <path d="M580 178 V35 H105 V67" stroke-dasharray="6 7"/>
                 <path d="M580 178 V350 H105 V313" stroke-dasharray="6 7"/>
-                <path d="M580 178 H620" stroke="#ffffff" stroke-dasharray="6 7" marker-end="url(#cv-arrow)"/>
+                <path class="sv-strong-line" d="M580 178 H620" stroke-dasharray="6 7" marker-end="url(#cv-arrow)"/>
               </g>
-              <path d="M510 135 V178 H580" fill="none" stroke="#888888" stroke-width="2.1" stroke-dasharray="6 7" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="sv-wire" d="M510 135 V178 H580" fill="none" stroke-width="2.1" stroke-dasharray="6 7" stroke-linecap="round" stroke-linejoin="round"/>
               <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
-                <text x="105" y="104" font-size="14" fill="#a0a0a0">OSC1</text>
-                <text x="105" y="124" font-size="24" fill="#e0e0e0">∿</text>
-                <text x="105" y="264" font-size="14" fill="#a0a0a0">OSC2</text>
-                <text x="105" y="284" font-size="24" fill="#e0e0e0">∿</text>
-                <text x="220" y="115" font-size="13" fill="#ffffff">XOR</text>
-                <text x="345" y="105" font-size="13" fill="#ffffff">SHIFT</text>
-                <text x="345" y="123" font-size="13" fill="#ffffff">REGISTER</text>
-                <text x="510" y="106" font-size="14" fill="#ffffff">3-BIT</text>
-                <text x="510" y="124" font-size="14" fill="#ffffff">DAC</text>
-                <text x="171" y="100" font-size="12" fill="#e0e0e0">DATA</text>
-                <text x="305" y="56" font-size="12" fill="#e0e0e0">LAST BIT</text>
-                <text x="390" y="253" font-size="12" fill="#e0e0e0">CLOCK</text>
-                <text x="80" y="58" font-size="13" fill="#e0e0e0">FM</text>
-                <text x="80" y="336" font-size="13" fill="#e0e0e0">FM</text>
-                <text x="538" y="164" font-size="12" fill="#e0e0e0">CV OUT</text>
-                <text x="320" y="378" font-size="12" fill="#a0a0a0">FEEDBACK</text>
-                <text x="608" y="204" font-size="13" fill="#ffffff">CV</text>
+                <text x="105" y="104" font-size="14" class="sv-muted">OSC1</text>
+                <text x="105" y="124" font-size="24" class="sv-text">∿</text>
+                <text x="105" y="264" font-size="14" class="sv-muted">OSC2</text>
+                <text x="105" y="284" font-size="24" class="sv-text">∿</text>
+                <text x="220" y="115" font-size="13" class="sv-strong">XOR</text>
+                <text x="345" y="105" font-size="13" class="sv-strong">SHIFT</text>
+                <text x="345" y="123" font-size="13" class="sv-strong">REGISTER</text>
+                <text x="510" y="106" font-size="14" class="sv-strong">3-BIT</text>
+                <text x="510" y="124" font-size="14" class="sv-strong">DAC</text>
+                <text x="171" y="100" font-size="12" class="sv-text">DATA</text>
+                <text x="305" y="56" font-size="12" class="sv-text">LAST BIT</text>
+                <text x="390" y="253" font-size="12" class="sv-text">CLOCK</text>
+                <text x="80" y="58" font-size="13" class="sv-text">FM</text>
+                <text x="80" y="336" font-size="13" class="sv-text">FM</text>
+                <text x="538" y="164" font-size="12" class="sv-text">CV OUT</text>
+                <text x="320" y="378" font-size="12" class="sv-muted">FEEDBACK</text>
+                <text x="608" y="204" font-size="13" class="sv-strong">CV</text>
               </g>
-              <circle cx="580" cy="178" r="4" fill="#ffffff"/>
+              <circle class="sv-dot" cx="580" cy="178" r="4"/>
             </svg>
             <div class="diagram-note">CONCEPTUAL ONLY <span>·</span> THE LIVE MODEL IS IN THE LAB</div>
           </div>
@@ -184,5 +189,6 @@
       </footer>
     </main>
   </div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode">☀</button>
 </body>
 </html>
