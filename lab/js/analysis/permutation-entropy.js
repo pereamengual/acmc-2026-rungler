@@ -13,8 +13,9 @@
 //   C (complexity)  0 for perfect regularity AND for pure noise; higher when the orders are
 //                   irregular but far from equally likely: structure without repetition.
 //
-// On the H–C plane noise sits bottom right, regular motion bottom left, and deterministic
-// chaos tends to sit higher up in between. It is a strong hint, not a proof.
+// On the H–C plane noise sits bottom right, regular motion bottom left, and signals that are
+// structured but not periodic sit higher up in between. Deterministic chaos tends to land
+// there, but so can other irregular signals: a hint, never a proof of chaos.
 
 export const ORDER = 4;
 const PATTERNS = 24; // 4! orders

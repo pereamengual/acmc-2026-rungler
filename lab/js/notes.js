@@ -18,7 +18,7 @@
 //   topics       { about, title, text }: a note appears only if what it is `about` is on
 //                screen ('stage' = always; or a monitor / indicator key; `modes` limits it)
 
-const ENTROPY = 'Every four consecutive values are reduced to their order (low, high, middle…): 24 possible orders. H = how evenly the orders are used (0 regular, 1 noise-like). C = high only for structure without repetition. On the plane: regular bottom left, noise bottom right, deterministic chaos higher up in between.';
+const ENTROPY = 'Every four consecutive values are reduced to their order (low, high, middle…): 24 possible orders. H = how evenly the orders are used (0 regular, 1 noise-like). C = high only for structure without repetition. On the plane: regular bottom left, noise bottom right; higher up in between, structured but not periodic. That region is compatible with chaos, but the indicator alone does not prove it.';
 
 export const STAGE_NOTES = {
   '0A': {
