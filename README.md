@@ -36,7 +36,7 @@ Open the local lab URL and press START AUDIO (start with the level low; headphon
 - `lab/js/core/`: declarative parameter registry, parameter store, conditions and saved settings.
 - `lab/js/adapters/`: offline RNBO facade and future engine-port boundary.
 - `tests/`: dependency-free Node tests.
-- `tools/`: syntax checker and loopback-only preview server.
+- `tools/`: syntax checker, loopback-only preview server and `build-offline.mjs`, which packs the lab into one HTML file that opens with a double click, without network or server (`node tools/build-offline.mjs <folder>` → `<folder>/lab/offline.html`; used for the workshop's USB plan B).
 - `AGENTS.md`: project architecture, scientific scope and verification rules.
 - [docs/architecture.md](docs/architecture.md): baseline, decisions, UI/engine contract and integration limits.
 
