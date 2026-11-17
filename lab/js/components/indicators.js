@@ -57,7 +57,7 @@ export class Indicators {
     this.el = element('figure', 'plot indicators');
     const heading = element('figcaption', 'plot-heading');
     this.badge = element('span', 'plot-badge', 'STOPPED');
-    heading.append(element('span', '', 'Chaos & entropy'), this.badge);
+    heading.append(element('span', '', 'Entropy & complexity'), this.badge);
 
     this.canvas = element('canvas', 'hc-plane');
     this.canvas.setAttribute('role', 'img');
