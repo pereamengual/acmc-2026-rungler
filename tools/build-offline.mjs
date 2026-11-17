@@ -1,10 +1,12 @@
-// OFFLINE BUILD — the lab as one HTML file that opens with a double click (plan B for the
-// workshop: a USB stick, no network, no server, nothing to install).
+// OFFLINE BUILD — the landing page and the lab as HTML files that open with a double click
+// (plan B for the workshop: a USB stick, no network, no server, nothing to install).
 //
-//   lab/index.html ─┐
-//   lab/lab.css ────┼─▶ [ this script ] ──▶ <out>/lab/offline.html  (everything inside)
-//   fonts/*.woff2 ──┤
-//   lab/js/**  ─────┘
+//   index.html, styles.css, app.js ──────▶ <out>/offline.html      (landing page, everything inside)
+//   lab/index.html, lab/lab.css, lab/js/** ▶ <out>/lab/offline.html  (the lab, everything inside)
+//   fonts/*.woff2 ─────────────────────── (inside both)
+//
+// The two link to each other: the landing page's "Open the laboratory" opens lab/offline.html,
+// and the lab's title goes back to offline.html.
 //
 // Why: opened as a file (file://), browsers refuse to load ES modules and the AudioWorklet
 // from separate files. So the modules are joined into one ordinary script, and the audio
@@ -16,8 +18,8 @@
 // with an error if it meets anything else, or a circular import.
 //
 // Usage:  node tools/build-offline.mjs <output folder>
-//         (the output folder gets lab/offline.html; copy the rest of the site next to it, so
-//          the diagram's links to the code still work)
+//         (the output folder gets offline.html and lab/offline.html; copy the rest of the site
+//          next to them, so the diagram's links to the code still work)
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, relative } from 'node:path';
@@ -101,7 +103,26 @@ swap('<link rel="stylesheet" href="./lab.css">', `<style>\n${safe(css)}\n</style
 swap('  <script type="module" src="./js/main.js"></script>\n', '');
 swap('</body>', `<script>\n${safe(page)}\n</script>\n</body>`);
 swap('<title>The Rungler / Laboratory — ACMC 2026</title>', '<title>The Rungler / Laboratory (offline) — ACMC 2026</title>');
+swap('<a class="brand" href="../">', '<a class="brand" href="../offline.html">');
+swap('Return to the <a href="../">', 'Return to the <a href="../offline.html">');
 
 mkdirSync(resolve(out, 'lab'), { recursive: true });
 writeFileSync(resolve(out, 'lab/offline.html'), html);
 console.log(`lab/offline.html: ${(html.length / 1024).toFixed(0)} KB → ${resolve(out, 'lab/offline.html')}`);
+
+// ── 5. The landing page, also in one file (its script is an ordinary one, nothing to bundle) ──
+const landingCss = readFileSync(resolve(ROOT, 'styles.css'), 'utf8')
+  .replace("url('./fonts/Orbitron.woff2')", `url(data:font/woff2;base64,${font})`);
+const landingJs = readFileSync(resolve(ROOT, 'app.js'), 'utf8');
+let landing = readFileSync(resolve(ROOT, 'index.html'), 'utf8');
+const swapLanding = (from, to) => { if (!landing.includes(from)) throw new Error(`index.html: not found: ${from}`); landing = landing.replace(from, to); };
+swapLanding('  <link rel="preload" href="./fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>\n', '');
+swapLanding('<link rel="stylesheet" href="./styles.css">', `<style>\n${safe(landingCss)}\n</style>`);
+swapLanding('  <script src="./app.js" defer></script>\n', '');
+swapLanding('</body>', `<script>\n${safe(landingJs)}\n</script>\n</body>`);
+swapLanding('href="./lab/">Open the laboratory', 'href="./lab/offline.html">Open the laboratory');
+swapLanding('<a class="brand" href="./"', '<a class="brand" href="./offline.html"');
+swapLanding(/<p class="fine-print">If this address does not load[^\n]*<\/p>/.exec(landing)?.[0] ?? 'missing fine print',
+  '<p class="fine-print">This is the offline copy (USB stick): it works without network or server. Online: <a href="https://pereamengual.github.io/acmc-2026-rungler/lab/">pereamengual.github.io/acmc-2026-rungler/lab</a> or <a href="https://pedrotrotz.com/rungler/lab/">pedrotrotz.com/rungler/lab</a>.</p>');
+writeFileSync(resolve(out, 'offline.html'), landing);
+console.log(`offline.html: ${(landing.length / 1024).toFixed(0)} KB → ${resolve(out, 'offline.html')}`);
