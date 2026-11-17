@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="An accessible browser-based preview of The Rungler workshop for ACMC 2026 at the University of Queensland. An interactive WebAudio/WebAssembly environment is in development.">
+  <meta name="description" content="The Rungler: a hands-on ACMC 2026 workshop on noise, clocks, feedback and Rob Hordijk's instruments. Check your browser, read about the workshop, then open the laboratory.">
   <title>The Rungler — ACMC 2026 Workshop</title>
   <link rel="preload" href="./fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./styles.css">
@@ -21,110 +21,166 @@
     </header>
 
     <main id="main">
+      <!-- The page reads top to bottom in the order of use: 1 check, 2 read, 3 open the lab. -->
       <section class="hero" aria-labelledby="hero-heading">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> PUBLIC WORKSHOP PREVIEW · SYNTHESIS ENGINE IN DEVELOPMENT</p>
+          <p class="eyebrow">ACMC 2026 · HANDS-ON WORKSHOP · 90 MINUTES</p>
           <h1 id="hero-heading">THE RUNGLER</h1>
           <p class="hero-subtitle">Feedback as instrument.</p>
-          <p class="hero-intro">Exploring the Rungler, nonlinear modulation, and the creative possibilities of recursive electronic systems.</p>
-          <p class="hero-description">A 90-minute hands-on workshop inspired by Rob Hordijk’s instrument designs. Participants will investigate the transition from stochastic variation to clocked structures, nonlinear feedback, and cross-coupled synthesis.</p>
-          <a class="cta-button" href="#compatibility-heading">Check this browser <span aria-hidden="true">↗</span></a>
-          <a class="cta-button" href="./lab/">Open the laboratory <span aria-hidden="true">↗</span></a>
+          <p class="hero-intro">From noise to chaos: a step-by-step journey through Rob Hordijk’s instrument designs, from random voltages to clocks, shift registers, feedback and the Blippoo Box — played live in your browser.</p>
+          <ol class="steps" aria-label="Three steps">
+            <li><a href="#check"><span class="step-number">1</span><span class="step-name">Check your browser</span><span class="step-hint">and your headphones</span></a></li>
+            <li><a href="#about"><span class="step-number">2</span><span class="step-name">About the workshop</span><span class="step-hint">ideas, method and credits</span></a></li>
+            <li><a href="#lab"><span class="step-number">3</span><span class="step-name">Open the lab</span><span class="step-hint">and start listening</span></a></li>
+          </ol>
           <div class="hero-tags" aria-label="Workshop requirements">
-            <span>90 MINUTES</span><span>WEB BROWSER</span><span>HEADPHONES</span><span>NO INSTALLATION</span>
+            <span>COMPUTER OR LAPTOP</span><span>UP-TO-DATE BROWSER</span><span>HEADPHONES</span><span>NO INSTALLATION</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── STEP 1 · CHECK ── -->
+      <section class="section step" id="check" aria-labelledby="check-heading">
+        <div class="step-header">
+          <span class="section-index">STEP 1 / 3</span>
+          <h2 id="check-heading">Check your browser.</h2>
+        </div>
+        <div class="check-grid">
+          <div>
+            <p class="lead">The laboratory runs entirely in the browser: nothing to install, nothing to download. You need a computer or laptop, an up-to-date browser (Chrome, Edge, Firefox, Safari or Brave) and headphones — wired ones are the most reliable.</p>
+            <p>First, check that this browser has the audio features the lab uses. Then play a short test tone to make sure your headphones work and the volume is comfortable.</p>
+            <p class="fine-print">Nothing is sent anywhere. The tone is soft, but put your headphones on with the volume low before you press it.</p>
+          </div>
+          <div class="test-panel">
+            <span class="panel-label">THIS BROWSER</span>
+            <button type="button" id="check-button">Check this browser <span aria-hidden="true">↗</span></button>
+            <div id="check-results" class="check-results" role="status" aria-live="polite"><p>Press the button to inspect this browser. No permissions required.</p></div>
+            <button type="button" id="tone-button" class="tone-button">Play a test tone <span aria-hidden="true">♪</span></button>
+            <p id="tone-status" class="check-results tone-status" role="status" aria-live="polite">A soft 440 Hz tone, about one second long.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── STEP 2 · ABOUT ── -->
+      <section class="section step" id="about" aria-labelledby="about-heading">
+        <div class="step-header">
+          <span class="section-index">STEP 2 / 3</span>
+          <h2 id="about-heading">About the workshop.</h2>
+        </div>
+
+        <div class="intro">
+          <div class="schematic" role="img" aria-label="Conceptual Rungler signal flow. The square wave of OSC1 (DATA) goes through an XOR with the register's last bit into an 8-bit shift register, clocked by OSC2 (CLOCK). Three cells of the register feed a 3-bit DAC, whose control voltage returns to both oscillators and is also an output. Conceptual only.">
+            <div class="diagram-topline"><span>SYSTEM STUDY / 001</span><span>CONCEPTUAL SIGNAL FLOW</span></div>
+            <svg viewBox="0 0 640 400" aria-hidden="true" focusable="false">
+              <defs>
+                <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#252525" stroke-width="0.6"/></pattern>
+                <marker id="signal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M1 1 L9 5 L1 9" fill="none" stroke="#888888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </marker>
+                <marker id="cv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M1 1 L9 5 L1 9" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </marker>
+              </defs>
+              <rect width="640" height="400" fill="url(#grid)" opacity=".6"/>
+              <g fill="#000000" stroke="#aaaaaa" stroke-width="1.8">
+                <circle cx="105" cy="110" r="43"/>
+                <circle cx="105" cy="270" r="43"/>
+                <rect x="195" y="90" width="50" height="40" rx="6"/>
+                <rect x="285" y="85" width="120" height="50" rx="6"/>
+                <rect x="460" y="85" width="100" height="50" rx="6"/>
+              </g>
+              <g fill="none" stroke="#888888" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#signal-arrow)">
+                <!-- DATA: OSC1 square → XOR → register. CLOCK: OSC2 → register, from below. -->
+                <path d="M148 110 H195"/>
+                <path d="M245 110 H285"/>
+                <path d="M148 270 H345 V135"/>
+                <path d="M405 110 H460"/>
+                <!-- the last bit returns to the XOR -->
+                <path d="M390 85 V62 H220 V90"/>
+                <!-- the DAC voltage returns around the perimeter to both oscillators -->
+                <path d="M580 178 V35 H105 V67" stroke-dasharray="6 7"/>
+                <path d="M580 178 V350 H105 V313" stroke-dasharray="6 7"/>
+                <path d="M580 178 H620" stroke="#ffffff" stroke-dasharray="6 7" marker-end="url(#cv-arrow)"/>
+              </g>
+              <path d="M510 135 V178 H580" fill="none" stroke="#888888" stroke-width="2.1" stroke-dasharray="6 7" stroke-linecap="round" stroke-linejoin="round"/>
+              <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
+                <text x="105" y="104" font-size="14" fill="#a0a0a0">OSC1</text>
+                <text x="105" y="124" font-size="24" fill="#e0e0e0">∿</text>
+                <text x="105" y="264" font-size="14" fill="#a0a0a0">OSC2</text>
+                <text x="105" y="284" font-size="24" fill="#e0e0e0">∿</text>
+                <text x="220" y="115" font-size="13" fill="#ffffff">XOR</text>
+                <text x="345" y="105" font-size="13" fill="#ffffff">SHIFT</text>
+                <text x="345" y="123" font-size="13" fill="#ffffff">REGISTER</text>
+                <text x="510" y="106" font-size="14" fill="#ffffff">3-BIT</text>
+                <text x="510" y="124" font-size="14" fill="#ffffff">DAC</text>
+                <text x="171" y="100" font-size="12" fill="#e0e0e0">DATA</text>
+                <text x="305" y="56" font-size="12" fill="#e0e0e0">LAST BIT</text>
+                <text x="390" y="253" font-size="12" fill="#e0e0e0">CLOCK</text>
+                <text x="80" y="58" font-size="13" fill="#e0e0e0">FM</text>
+                <text x="80" y="336" font-size="13" fill="#e0e0e0">FM</text>
+                <text x="538" y="164" font-size="12" fill="#e0e0e0">CV OUT</text>
+                <text x="320" y="378" font-size="12" fill="#a0a0a0">FEEDBACK</text>
+                <text x="608" y="204" font-size="13" fill="#ffffff">CV</text>
+              </g>
+              <circle cx="580" cy="178" r="4" fill="#ffffff"/>
+            </svg>
+            <div class="diagram-note">CONCEPTUAL ONLY <span>·</span> THE LIVE MODEL IS IN THE LAB</div>
+          </div>
+          <div class="intro-text">
+            <h3 class="block-title">The approach</h3>
+            <p class="lead">What happens when a system’s behaviour arises from its own feedback rather than from a sequence imposed from outside?</p>
+            <p>The workshop builds the Rungler and the Blippoo Box one idea at a time. Each stage adds a single new element to the previous one, so that you can hear and see what that element changes: first noise, then a clock and a memory, then a shift register, feedback, a comparator, a resonator, and finally two Runglers coupled to each other.</p>
+            <p>Every stage has live monitors (oscilloscope, spectrum, XY, event map, the register itself) and a block diagram whose blocks link to the code that runs them.</p>
           </div>
         </div>
 
-      </section>
-
-      <section class="section intro" aria-labelledby="approach-heading">
-        <div class="schematic" aria-label="Conceptual Rungler signal flow: VCO A drives the shift register clock; VCO B supplies data. The register feeds a 3-bit DAC, whose CV output feeds back to the FM inputs of both oscillators and branches to the CV output. Illustrative only, not a live simulation" role="img">
-          <div class="diagram-topline"><span>SYSTEM STUDY / 001</span><span>CONCEPTUAL SIGNAL FLOW</span></div>
-          <svg viewBox="0 0 640 400" aria-hidden="true" focusable="false">
-            <defs>
-              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#252525" stroke-width="0.6"/></pattern>
-              <marker id="signal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M1 1 L9 5 L1 9" fill="none" stroke="#888888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </marker>
-              <marker id="cv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M1 1 L9 5 L1 9" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </marker>
-            </defs>
-            <rect width="640" height="400" fill="url(#grid)" opacity=".6"/>
-            <g fill="#000000" stroke="#aaaaaa" stroke-width="1.8">
-              <circle cx="105" cy="110" r="43"/>
-              <circle cx="105" cy="270" r="43"/>
-              <rect x="270" y="85" width="130" height="50" rx="6"/>
-              <rect x="460" y="85" width="100" height="50" rx="6"/>
-            </g>
-            <g fill="none" stroke="#888888" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#signal-arrow)">
-              <!-- Signal flow runs left to right; bends are not junctions. -->
-              <path d="M148 110 H270"/>
-              <path d="M148 270 H335 V135"/>
-              <path d="M400 110 H460"/>
-              <!-- DAC CV returns around the perimeter to both FM inputs. -->
-              <path d="M580 178 V35 H105 V67" stroke-dasharray="6 7"/>
-              <path d="M580 178 V350 H105 V313" stroke-dasharray="6 7"/>
-              <path d="M580 178 H620" stroke="#ffffff" stroke-dasharray="6 7" marker-end="url(#cv-arrow)"/>
-            </g>
-            <path d="M510 135 V178 H580" fill="none" stroke="#888888" stroke-width="2.1" stroke-dasharray="6 7" stroke-linecap="round" stroke-linejoin="round"/>
-            <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">
-              <text x="105" y="104" font-size="14" fill="#a0a0a0">VCO A</text>
-              <text x="105" y="124" font-size="24" fill="#e0e0e0">∿</text>
-              <text x="105" y="264" font-size="14" fill="#a0a0a0">VCO B</text>
-              <text x="105" y="284" font-size="24" fill="#e0e0e0">∿</text>
-              <text x="335" y="105" font-size="13" fill="#ffffff">SHIFT</text>
-              <text x="335" y="123" font-size="13" fill="#ffffff">REGISTER</text>
-              <text x="510" y="106" font-size="14" fill="#ffffff">3-BIT</text>
-              <text x="510" y="124" font-size="14" fill="#ffffff">DAC</text>
-              <text x="222" y="98" font-size="12" fill="#e0e0e0">CLOCK</text>
-              <text x="365" y="253" font-size="12" fill="#e0e0e0">DATA</text>
-              <text x="80" y="58" font-size="13" fill="#e0e0e0">FM</text>
-              <text x="80" y="336" font-size="13" fill="#e0e0e0">FM</text>
-              <text x="538" y="164" font-size="12" fill="#e0e0e0">CV OUT</text>
-              <text x="320" y="378" font-size="12" fill="#a0a0a0">FEEDBACK</text>
-              <text x="608" y="204" font-size="13" fill="#ffffff">CV</text>
-            </g>
-            <!-- Only the shared feedback/output junction carries a dot. -->
-            <circle cx="580" cy="178" r="4" fill="#ffffff"/>
-          </svg>
-          <div class="diagram-note">ILLUSTRATIVE ONLY <span>↗</span> NOT A RUNNING SYNTHESIS MODEL</div>
-        </div>
-        <div class="section-header"><span class="section-index">01 / APPROACH</span><h2 id="approach-heading">Beyond fixed grids.</h2></div>
-        <div class="intro-grid"><p>What happens when a system’s behavior arises from its internal feedback rather than from an externally imposed sequence?</p><p>This workshop puts stochastic processes, sample-and-hold, deterministic feedback, and quantization side by side. The goal is to listen, observe, and ask what each architecture enables—and what it constrains.</p></div>
-      </section>
-
-      <section class="section" aria-labelledby="stages-heading">
-        <div class="section-header"><span class="section-index">02 / LEARNING PATH</span><h2 id="stages-heading">Six stages of exploration.</h2></div>
-        <p class="section-lead">The following modules describe the planned hands-on exercises. <strong>Interactive controls and sound generation are not yet enabled in this preview.</strong></p>
+        <h3 class="block-title">Learning path · six stages</h3>
         <ol class="stages">
-          <li><span class="stage-id">00a</span><div><h3>Continuous noise</h3><p>Unclocked stochastic variation as a point of comparison: fluctuating signals without an explicit stored state.</p></div><span class="stage-type">STOCHASTIC</span></li>
-          <li><span class="stage-id">00b</span><div><h3>Clocked sample &amp; hold</h3><p>Sampling, discrete steps, and an optional diatonic quantizer: where regularity enters the system.</p></div><span class="stage-type">CLOCKED</span></li>
-          <li><span class="stage-id">01</span><div><h3>The core Rungler</h3><p>Coupled oscillators, a shift register, feedback, and phase-space exploration of changing system behavior.</p></div><span class="stage-type">RECURSIVE</span></li>
-          <li><span class="stage-id">02</span><div><h3>PWM acoustic generation</h3><p>Comparator interference and pulse-width modulation as audible consequences of interacting control signals.</p></div><span class="stage-type">COMPARATOR</span></li>
-          <li><span class="stage-id">03</span><div><h3>Exciter &amp; resonator</h3><p>Routing complex excitation into the Twin Peak Filter to explore resonances and vocal-like spectral structures.</p></div><span class="stage-type">RESONANCE</span></li>
-          <li><span class="stage-id">04</span><div><h3>Blippoo Box architecture</h3><p>Two cross-coupled Rungler systems and recursive modulation across a larger instrument topology.</p></div><span class="stage-type">SYSTEM</span></li>
+          <li><span class="stage-id">0a</span><div><h4>Continuous noise</h4><p>Noise as raw material: heard directly, through a filter, and slowed down to move the pitch of a sine oscillator. No clock, no memory.</p></div><span class="stage-type">STOCHASTIC</span></li>
+          <li><span class="stage-id">0b</span><div><h4>Clocked sample &amp; hold</h4><p>A clock samples the noise and holds each value as a pitch; a quantizer snaps it to octaves, a major scale or every semitone.</p></div><span class="stage-type">CLOCKED</span></li>
+          <li><span class="stage-id">1</span><div><h4>The core Rungler</h4><p>In three steps: an 8-bit shift register takes the place of the sample &amp; hold; an XOR loops its last bit back; its voltage feeds back into the two oscillators.</p></div><span class="stage-type">RECURSIVE</span></li>
+          <li><span class="stage-id">2</span><div><h4>PWM by comparator</h4><p>A comparator turns the two oscillators’ triangles into a pulse whose width keeps changing — the Rungler draws the timbre.</p></div><span class="stage-type">COMPARATOR</span></li>
+          <li><span class="stage-id">3</span><div><h4>Exciter &amp; Twin Peak</h4><p>The pulse excites a Twin Peak resonator, two resonant filters subtracted, as in the Blippoo Box: each edge becomes a ping.</p></div><span class="stage-type">RESONANCE</span></li>
+          <li><span class="stage-id">4</span><div><h4>Blippoo Box architecture</h4><p>In three steps: two cross-coupled Runglers; a sample &amp; hold that warps time; and the same voltage spreading the two peaks apart.</p></div><span class="stage-type">SYSTEM</span></li>
         </ol>
+
+        <div class="why">
+          <h3 class="block-title">Why plain JavaScript in an AudioWorklet</h3>
+          <p class="lead">The instruments were first sketched in Cycling ’74 <code>gen~</code> and exported to the browser with RNBO. For the workshop they are rewritten as readable JavaScript running in a standard AudioWorklet, so that participants can inspect, modify and preserve them, and see their internal state at audio rate.</p>
+          <ol class="reasons">
+            <li><strong>Preservation.</strong> The lab depends only on the W3C Web Audio API, not on a specific version of a vendor runtime. Preserving Hordijk’s ideas also means keeping the tools that carry them alive.</li>
+            <li><strong>Code as workshop material.</strong> Open a block’s code, change one line, and hear the result — without installing anything or owning a licence.</li>
+            <li><strong>Internal state at audio rate.</strong> The XY, register and event-map views read the bits, the DAC value and the phases straight from the engine.</li>
+            <li><strong>One model for research and teaching.</strong> The code follows the structure of the research prototype, so the two can be checked against each other. Here it is a didactic model, not a research result.</li>
+            <li><strong>Numerical decisions in plain sight.</strong> Every limiter, saturation or clock-edge interpolation is written out and can be discussed.</li>
+            <li><strong>Testable without sound.</strong> The engine also runs outside the browser, where it is checked by automated tests.</li>
+            <li><strong>Robust in the classroom.</strong> Small script files, nothing to compile or download; the whole lab also fits in a single file that works offline.</li>
+            <li><strong>Consistent with <em>Resistance Music</em>.</strong> The tool itself does not depend on a platform.</li>
+          </ol>
+        </div>
+
+        <div class="credits">
+          <h3 class="block-title">What this is — and credits</h3>
+          <p><strong>Didactic models.</strong> The stages are functional models of the instruments’ block diagrams, built for listening and understanding. They are not emulations of the circuits, and the monitors show the model, not measurements of hardware.</p>
+          <p><strong>Rob Hordijk.</strong> The Rungler, the Benjolin and the Blippoo Box are the work of Rob Hordijk. The Twin Peak resonator and the Blippoo Box architecture follow his description in R. Hordijk, “The Blippoo Box: A Chaotic Electronic Music Instrument, Bent by Design,” <em>Leonardo Music Journal</em> 19 (2009): 35–43, <a href="https://doi.org/10.1162/lmj.2009.19.35">doi:10.1162/lmj.2009.19.35</a>.</p>
+          <p><strong>Workshop and code.</strong> Pere Amengual-Gomila (Pedro Trotz). The code is published under the <a href="https://github.com/pereamengual/acmc-2026-rungler/blob/main/LICENSE">MIT licence</a> at <a href="https://github.com/pereamengual/acmc-2026-rungler">github.com/pereamengual/acmc-2026-rungler</a>. Orbitron font: SIL Open Font License.</p>
+        </div>
       </section>
 
-      <section class="section compatibility" aria-labelledby="compatibility-heading">
-        <div>
-          <span class="section-index">03 / TECHNICAL READINESS</span>
-          <h2 id="compatibility-heading">Browser compatibility.</h2>
-          <p>The eventual workshop will run in a modern browser through WebAudio and WebAssembly, without an installation. You can check whether the current browser exposes the required platform features.</p>
-          <p class="fine-print">This is a browser-capability check, not a test of the future RNBO patch or of access from the University of Queensland network. It produces no sound.</p>
+      <!-- ── STEP 3 · OPEN THE LAB ── -->
+      <section class="section step lab-step" id="lab" aria-labelledby="lab-heading">
+        <div class="step-header">
+          <span class="section-index">STEP 3 / 3</span>
+          <h2 id="lab-heading">Open the lab.</h2>
         </div>
-        <div class="test-panel">
-          <span class="panel-label">LOCAL ENVIRONMENT CHECK</span>
-          <button type="button" id="check-button">Check this browser <span aria-hidden="true">↗</span></button>
-          <div id="check-results" class="check-results" role="status" aria-live="polite"><p>Press the button to inspect browser capabilities. No downloads or permissions required.</p></div>
-        </div>
+        <p class="lead">Put your headphones on, keep the volume low, and press <strong>START AUDIO</strong> inside the lab. Begin with stage 0a and move on one stage at a time.</p>
+        <a class="cta-button lab-button" href="./lab/">Open the laboratory <span aria-hidden="true">↗</span></a>
+        <p class="fine-print">If this address does not load, use the mirror at <a href="https://pedrotrotz.com/rungler/lab/">pedrotrotz.com/rungler/lab</a>. An offline copy is available from the workshop leader on a USB stick.</p>
       </section>
 
       <footer class="footer">
-        <div><strong>THE RUNGLER</strong><span> A hands-on ACMC 2026 workshop</span></div>
-        <div>Pedro Trotz / Pere Amengual-Gomila <span> · Inspired by the work of Rob Hordijk</span></div>
-        <p>Hosted on GitHub Pages. This page is a project preview; it does not yet contain the interactive workshop engine.</p>
+        <div><strong>THE RUNGLER</strong><span> · a hands-on ACMC 2026 workshop</span></div>
+        <div>Pedro Trotz / Pere Amengual-Gomila <span>· inspired by the work of Rob Hordijk</span></div>
       </footer>
     </main>
   </div>

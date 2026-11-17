@@ -27,7 +27,7 @@ Open the local lab URL and press START AUDIO (start with the level low; headphon
 
 ## Structure
 
-- `index.html`, `styles.css`, `app.js`: existing workshop preview and browser capability checker; only a lab link was added to the landing page.
+- `index.html`, `styles.css`, `app.js`: the landing page, read in the order of use — 1 check the browser (capabilities and a test tone for the headphones), 2 about the workshop (approach, the six stages, why an AudioWorklet, credits), 3 open the lab.
 - `fonts/`: local Orbitron font and SIL Open Font License (`OFL.txt`).
 - `lab/`: independent semantic document, monochrome styles and native ES modules.
 - `lab/js/dsp/`: the AudioWorklet engine — `modules/` (oscillator, shift register, DACs, comparator, filters, Rungler, Blippoo core…) and `patches/` (one file per stage).
@@ -41,3 +41,7 @@ Open the local lab URL and press START AUDIO (start with the level low; headphon
 - [docs/architecture.md](docs/architecture.md): baseline, decisions, UI/engine contract and integration limits.
 
 No CDN, external UI library, build system or runtime package is used. Access from University of Queensland networks still requires independent confirmation. Testing so far has used a Chromium-based browser; Firefox and Safari are still to be checked.
+
+## Licence
+
+Code: MIT (see `LICENSE`). Orbitron font: SIL Open Font License (`fonts/OFL.txt`). The instruments modelled here are the work of Rob Hordijk.
