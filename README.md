@@ -1,8 +1,8 @@
 # The Rungler — ACMC 2026 Workshop
 
-A public workshop preview and a separate laboratory (`/lab/`) inspired by Rob Hordijk's instrument architectures.
+The landing page and the laboratory (`/lab/`) of the workshop *From Noise to Chaos* (ACMC 2026), inspired by Rob Hordijk's instrument architectures.
 
-**Status (Phase 2, work in progress):** the landing page is a static preview. `/lab/` runs a plain-JavaScript AudioWorklet engine with six stages of growing complexity — 0a continuous noise, 0b clocked sample & hold, 1 the core Rungler (three steps), 2 PWM by comparator, 3 exciter and Twin Peak, 4 Blippoo Box architecture (three steps) — with live monitors, block diagrams and chaos/entropy indicators. These are didactic functional models of the block diagrams, not circuit emulations or hardware measurements. No RNBO export is used.
+**Status (phase 2, ready for the workshop):** the landing page guides participants in three steps (check, read, open the lab). `/lab/` runs a plain-JavaScript AudioWorklet engine with six stages of growing complexity — 0a continuous noise, 0b clocked sample & hold, 1 the core Rungler (three steps), 2 PWM by comparator, 3 exciter and Twin Peak, 4 Blippoo Box architecture (three steps) — with live monitors, block diagrams and entropy & complexity indicators. These are didactic functional models of the block diagrams, not circuit emulations or hardware measurements. No RNBO export is used.
 
 ## Addresses
 
@@ -34,11 +34,11 @@ Open the local lab URL and press START AUDIO (start with the level low; headphon
 - `lab/js/analysis/`: entropy/complexity, register period, event map and twin divergence.
 - `lab/js/components/`: controls, monitors, indicators and block diagrams.
 - `lab/js/core/`: declarative parameter registry, parameter store, conditions and saved settings.
-- `lab/js/adapters/`: offline RNBO facade and future engine-port boundary.
 - `tests/`: dependency-free Node tests.
 - `tools/`: syntax checker, loopback-only preview server and `build-offline.mjs`, which packs the landing page and the lab into HTML files that open with a double click, without network or server (`node tools/build-offline.mjs <folder>` → `<folder>/offline.html` and `<folder>/lab/offline.html`, linked to each other; used for the workshop's USB plan B).
 - `AGENTS.md`: project architecture, scientific scope and verification rules.
-- [docs/architecture.md](docs/architecture.md): baseline, decisions, UI/engine contract and integration limits.
+- [docs/architecture.md](docs/architecture.md): how the pages, the engine and the offline build fit together.
+- `archive/phase-1/`: the earlier interface prototype (RNBO adapter, simulated graphics) and its reports, for reference only.
 
 No CDN, external UI library, build system or runtime package is used. Access from University of Queensland networks still requires independent confirmation. Testing so far has used a Chromium-based browser; Firefox and Safari are still to be checked.
 

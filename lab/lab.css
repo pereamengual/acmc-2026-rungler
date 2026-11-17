@@ -8,22 +8,22 @@
 /* ── Colours ── dark is the default; light follows the system unless the switch chose. */
 :root {
   color-scheme: dark;
-  --bg: #000; --panel: #070707; --line: #2c2c2c; --line-strong: #555;
+  --bg: #000; --panel: #070707; --line: #2c2c2c; --line-strong: #636363;
   --ink: #eeeeee; --text: #d6d6d6; --muted: #9a9a9a; --dim: #8a8a8a;
   --grid: #232323; --fade: rgba(0, 0, 0, 0.18); --invert-bg: #eee; --invert-ink: #000;
   --title: Orbitron, 'SF Mono', Menlo, monospace;
 }
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #e4e0d6; --panel: #ebe7de; --line: #c8c3b7; --line-strong: #8a857a;
-  --ink: #1c1b19; --text: #2e2c29; --muted: #5c5850; --dim: #6b675e;
+  --bg: #e4e0d6; --panel: #ebe7de; --line: #c8c3b7; --line-strong: #7a756a;
+  --ink: #1c1b19; --text: #2e2c29; --muted: #5c5850; --dim: #5f5b52;
   --grid: #d9d4c9; --fade: rgba(235, 231, 222, 0.2); --invert-bg: #1c1b19; --invert-ink: #e4e0d6;
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     color-scheme: light;
-    --bg: #e4e0d6; --panel: #ebe7de; --line: #c8c3b7; --line-strong: #8a857a;
-    --ink: #1c1b19; --text: #2e2c29; --muted: #5c5850; --dim: #6b675e;
+    --bg: #e4e0d6; --panel: #ebe7de; --line: #c8c3b7; --line-strong: #7a756a;
+    --ink: #1c1b19; --text: #2e2c29; --muted: #5c5850; --dim: #5f5b52;
     --grid: #d9d4c9; --fade: rgba(235, 231, 222, 0.2); --invert-bg: #1c1b19; --invert-ink: #e4e0d6;
   }
 }
@@ -220,6 +220,11 @@ h1, h2 { font-family: var(--title); font-weight: 400; margin: 0; color: var(--in
   .indicator-list { contain: none; }
   .hc-plane { max-width: 240px; }
   .master input { width: 100px; }
+}
+/* Touch screens: controls at least 44 px tall (desktop keeps the compact layout) */
+@media (pointer: coarse) {
+  button, .stage-link { min-height: 44px; }
+  .choice span { padding: 10px 12px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 @media (forced-colors: active) { .knob-face { forced-color-adjust: none; } .toggle-input { appearance: auto; } .toggle-input::before { display: none; } }

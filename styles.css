@@ -14,7 +14,7 @@
   --soft: #b0b0b0;       /* secondary text */
   --muted: #a0a0a0;      /* labels, captions */
   --line: #252525;       /* rules and frames */
-  --border: #555;        /* buttons */
+  --border: #636363;        /* buttons */
   --invert-bg: #fff; --invert-ink: #000; --invert-hint: #333;
   /* the conceptual diagram */
   --sv-node: #aaaaaa; --sv-wire: #888888; --sv-grid: #252525;
@@ -26,7 +26,7 @@
   color-scheme: light;
   --bg: #e4e0d6; --panel: #ebe7de;
   --strong: #1c1b19; --text: #2e2c29; --soft: #3d3a35; --muted: #5c5850;
-  --line: #c8c3b7; --border: #8a857a;
+  --line: #c8c3b7; --border: #7a756a;
   --invert-bg: #1c1b19; --invert-ink: #e4e0d6; --invert-hint: #c8c3b7;
   --sv-node: #6b675e; --sv-wire: #6b675e; --sv-grid: #d4cfc3;
 }
@@ -35,7 +35,7 @@
     color-scheme: light;
     --bg: #e4e0d6; --panel: #ebe7de;
     --strong: #1c1b19; --text: #2e2c29; --soft: #3d3a35; --muted: #5c5850;
-    --line: #c8c3b7; --border: #8a857a;
+    --line: #c8c3b7; --border: #7a756a;
     --invert-bg: #1c1b19; --invert-ink: #e4e0d6; --invert-hint: #c8c3b7;
     --sv-node: #6b675e; --sv-wire: #6b675e; --sv-grid: #d4cfc3;
   }

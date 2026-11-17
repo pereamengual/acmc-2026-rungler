@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STAGES, PARAMETERS, normalize, denormalize, clampValue, formatValue, decimalsOf, defaultValue } from '../lab/js/core/parameters.js';
 import { ParameterStore } from '../lab/js/core/store.js';
-import { graphicFrame } from '../lab/js/core/graphic-demo.js';
 test('six stages have unique stable IDs and valid defaults/scales', () => {
   assert.deepEqual(STAGES.map(s => s.id), ['0A','0B','1','2','3','4']);
   const ids=STAGES.flatMap(s=>s.parameters.map(p=>p.id));
@@ -37,12 +36,6 @@ test('store persists independent stages, clamps, resets and cleans subscriptions
   assert.throws(()=>store.snapshot('missing'),RangeError);
   assert.throws(()=>store.set('1.osc1',Infinity),TypeError);
 });
-test('illustrative coordinates stay bounded and deterministic, without engine data', () => {
-  const frame=graphicFrame(1,.8);
-  assert.deepEqual(frame,graphicFrame(1,.8));
-  for(const points of Object.values(frame)) for(const point of points) assert.ok(point.every(v=>v>=0 && v<=1));
-});
-
 test('store rejects inherited IDs and all non-finite/nonnumeric requests without mutation', () => {
   const store = new ParameterStore(), before = store.snapshot('0A'), events = [];
   store.subscribe(event => events.push(event));
