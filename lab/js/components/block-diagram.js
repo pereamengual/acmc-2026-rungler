@@ -2,6 +2,7 @@
 //
 //   blocks: { id, label, file, x, y, w, h }      a box with its name and a link to its code
 //   wires:  { type, points, label, at }          a line through `points`, ending in an arrow
+//   junctions: [[x, y], …]                       optional dots where one signal splits in two
 //   groups: { label, x, y, w, h }                optional frame around blocks that form one
 //                                                instrument (e.g. the Rungler inside stage 2)
 //
@@ -74,6 +75,8 @@ export function drawBlockDiagram(container, diagram, valueOf = () => null) {
     root.append(svg('path', { d, class: 'wire-halo' }));
     root.append(svg('path', { d, class: `wire wire-${wire.type}${quiet(wire, valueOf)}`, 'marker-end': `url(#arrow-${wire.type})` }));
   }
+
+  for (const [cx, cy] of diagram.junctions ?? []) root.append(svg('circle', { cx, cy, r: 3.5, class: 'diagram-junction' }));
 
   for (const block of diagram.blocks.filter(shown)) {
     const w = block.w ?? BLOCK_W, h = block.h ?? BLOCK_H, cx = block.x + w / 2;

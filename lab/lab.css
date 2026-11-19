@@ -52,6 +52,12 @@ h1, h2 { font-family: var(--title); font-weight: 400; margin: 0; color: var(--in
 .status-chip { margin: 0; font: 9px/1.5 var(--title); border: 1px solid var(--line); padding: 5px 10px; color: var(--ink); }
 .status-chip span { font: 11px/1.4 system-ui, sans-serif; color: var(--muted); }
 .audio-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+/* START AUDIO is the first thing to press: filled, larger and with a slow pulse until the audio
+   runs; then (STOP AUDIO) it goes back to a plain button. No pulse with reduced motion. */
+#audio-start { min-height: 44px; padding: 8px 22px; font-size: 13px; font-weight: 700; }
+#audio-start:not([data-state="running"]) { background: var(--invert-bg); color: var(--invert-ink); border: 2px solid var(--invert-bg); animation: audio-call 1.8s ease-in-out infinite; }
+#audio-start:not([data-state="running"]):hover:enabled { outline: 2px solid var(--ink); outline-offset: 3px; }
+@keyframes audio-call { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ink) 45%, transparent); } 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--ink) 0%, transparent); } }
 .master { display: flex; align-items: center; gap: 8px; font: 9px var(--title); }
 .master input { width: 130px; accent-color: var(--ink); }
 .master output { font: 11px monospace; color: var(--muted); min-width: 64px; }
@@ -186,7 +192,7 @@ h1, h2 { font-family: var(--title); font-weight: 400; margin: 0; color: var(--in
 .wire-cv { stroke-dasharray: 7 4; }
 .wire-logic { stroke-dasharray: 1.5 3.5; stroke-linecap: round; stroke-width: 2; }
 .wire-halo { fill: none; stroke: var(--panel); stroke-width: 6; }
-.diagram-arrow { fill: var(--ink); }
+.diagram-arrow, .diagram-junction { fill: var(--ink); }
 .diagram-group { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 2 4; }
 .group-label { font: 9px monospace; letter-spacing: .08em; fill: var(--muted); }
 .diagram-block rect { fill: var(--bg); stroke: var(--line-strong); stroke-width: 1.2; }
@@ -226,7 +232,7 @@ h1, h2 { font-family: var(--title); font-weight: 400; margin: 0; color: var(--in
   button, .stage-link { min-height: 44px; }
   .choice span { padding: 10px 12px; }
 }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 @media (forced-colors: active) { .knob-face { forced-color-adjust: none; } .toggle-input { appearance: auto; } .toggle-input::before { display: none; } }
 
 /* ── Settings window (copy / paste) ── */

@@ -133,7 +133,7 @@ export class CVHistory extends Monitor {
 
 // ── XY: two signals against each other, with a slow fade so shapes build up ──
 // A stage can ask for its own axes and style (see `xy` in notes.js): stage 0A draws a delay
-// map with dots and a faint diagonal, where "same value as a moment ago" would fall.
+// map with dots.
 const XY_AXES = {
   '1': ['OSC1 (DATA) triangle', 'OSC2 (CLOCK) triangle'],
   '2': ['OSC1 (DATA) triangle', 'OSC2 (CLOCK) triangle'],
@@ -157,10 +157,6 @@ export class XYPlot extends Monitor {
     const size = Math.min(width, height), left = (width - size) / 2, top = (height - size) / 2;
     const X = v => left + (0.5 + v / (2 * this.scale)) * size;
     const Y = v => top + (0.5 - v / (2 * this.scale)) * size;
-    if (view.diagonal) {
-      ctx.strokeStyle = colors().line; ctx.lineWidth = 1; ctx.beginPath();
-      ctx.moveTo(X(-this.scale), Y(-this.scale)); ctx.lineTo(X(this.scale), Y(this.scale)); ctx.stroke();
-    }
     ctx.strokeStyle = ctx.fillStyle = colors().ink; ctx.lineWidth = 1; ctx.beginPath();
     if (dots) {
       for (let k = 0; k < xy.length; k += 2) ctx.fillRect(X(xy[k]) - 1, Y(xy[k + 1]) - 1, 2, 2);

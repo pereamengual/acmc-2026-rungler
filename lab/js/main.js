@@ -90,6 +90,7 @@ const STATE_TEXT = {
 function showAudioState(state, detail = '') {
   const running = state === 'running';
   const [chip, chipDetail, status] = STATE_TEXT[state];
+  startButton.dataset.state = state;  // lab.css: filled and pulsing until the audio runs
   startButton.textContent = running ? 'STOP AUDIO' : state === 'starting' ? 'STARTING…' : 'START AUDIO';
   startButton.disabled = state === 'starting' || (state === 'error' && !audio.supported);
   muteButton.disabled = panicButton.disabled = !running;

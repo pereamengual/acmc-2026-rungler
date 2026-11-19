@@ -25,7 +25,7 @@ export const DIAGRAMS = {
     ],
     wires: [
       { type: 'audio', points: [[88, 60], [88, 26], [828, 26], [828, 60]], label: 'Listen: noise source', at: [458, 19], active: { id: '0A.listen', in: [0] } },
-      { type: 'audio', points: [[156, 80], [440, 80]], label: 'cutoff = bandwidth × 100', at: [298, 73], active: { id: '0A.listen', in: [1] } },
+      { type: 'audio', points: [[156, 80], [440, 80]], active: { id: '0A.listen', in: [1] } },
       { type: 'audio', points: [[576, 80], [760, 80]], label: 'Listen: filtered noise', at: [668, 73], active: { id: '0A.listen', in: [1] } },
       { type: 'audio', points: [[156, 142], [230, 142]], active: { id: '0A.listen', in: [2] } },
       { type: 'cv', points: [[366, 142], [440, 142]], label: 'pitch CV', at: [403, 135], active: [{ id: '0A.listen', in: [2] }, { id: '0A.depth', above: 0 }] },
@@ -146,6 +146,7 @@ export const DIAGRAMS = {
     groups: [
       { label: 'CHAOTIC CORE', x: 6, y: 6, w: 724, h: 388 }
     ],
+    junctions: [[206, 96], [206, 296]],
     blocks: [
       { id: 'oscA', label: 'OSC A', file: 'modules/oscillator.js', x: 40, y: 86 },
       { id: 'runglerA', label: 'RUNGLER A', file: 'modules/blippoo-core.js', x: 300, y: 86 },
@@ -158,10 +159,12 @@ export const DIAGRAMS = {
     ],
     wires: [
       // each oscillator clocks its own Rungler and gives its square as data to the other: the X
-      { type: 'logic', points: [[176, 96], [300, 96]], label: 'clock', at: [238, 90] },
-      { type: 'logic', points: [[176, 116], [196, 116], [266, 276], [300, 276]], label: 'data', at: [284, 270] },
-      { type: 'logic', points: [[176, 276], [196, 276], [266, 116], [300, 116]], label: 'data', at: [284, 110] },
-      { type: 'logic', points: [[176, 296], [300, 296]], label: 'clock', at: [238, 290] },
+      // One square leaves each oscillator and splits at the dot, so clock and data are seen to
+      // be the same signal.
+      { type: 'logic', points: [[176, 96], [300, 96]], label: 'clock', at: [250, 90] },
+      { type: 'logic', points: [[176, 96], [206, 96], [272, 276], [300, 276]], label: 'data', at: [286, 270] },
+      { type: 'logic', points: [[176, 296], [206, 296], [272, 116], [300, 116]], label: 'data', at: [286, 110] },
+      { type: 'logic', points: [[176, 296], [300, 296]], label: 'clock', at: [250, 290] },
       // each Rungler moves its own oscillator (A from above, B from below)…
       { type: 'cv', points: [[400, 86], [400, 56], [120, 56], [120, 86]], label: 'Rungler A → Rate A', at: [260, 50], active: { id: '4.runglerToRateA', above: 0 } },
       { type: 'cv', points: [[400, 306], [400, 336], [120, 336], [120, 306]], label: 'Rungler B → Rate B', at: [260, 350], active: { id: '4.runglerToRateB', above: 0 } },

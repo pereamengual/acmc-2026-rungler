@@ -76,6 +76,11 @@ export class Indicators {
     layout.append(this.canvas, this.readouts);
     this.el.append(heading, layout);
     this.reset();
+    // Redraw when the plane changes size, also before START AUDIO (no frames yet): otherwise
+    // a plane drawn while the layout was still settling stays stretched, with huge labels.
+    // The panel lives as long as the page, so the observer does too.
+    this.resizeObserver = new ResizeObserver(() => this.drawPlane());
+    this.resizeObserver.observe(this.canvas);
   }
 
   // Each reading has its value and, on a line of its own below, a status ("collecting 38/100",

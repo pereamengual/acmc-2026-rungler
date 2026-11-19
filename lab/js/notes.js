@@ -8,7 +8,7 @@
 //   monitors     which views are on screen: scope, spectrum, cv, xy, events, register
 //   indicators   which readings: entropy, period, twin
 //   modes        optional: different views for each value of one selector ({ by, 0: …, 1: … })
-//   xy           optional: { axes: [x, y], style: 'dots', diagonal: true } for the XY monitor
+//   xy           optional: { axes: [x, y], style: 'dots' } for the XY monitor
 //   eventLimit   optional: how many events the event map keeps (default 3000)
 //   eventLabel   optional: what the event map's axes show, when it changes with the mode
 //   cvLabel      optional: what the CV history shows, if not the default
@@ -25,11 +25,11 @@ export const STAGE_NOTES = {
     modes: {
       by: '0A.listen',
       0: { monitors: ['scope', 'spectrum', 'xy'], indicators: [],
-        xy: { axes: ['noise now', 'one sample earlier'], style: 'dots', diagonal: true } },
+        xy: { axes: ['noise now', 'one sample earlier'], style: 'dots' } },
       1: { monitors: ['scope', 'spectrum', 'xy'], indicators: [],
-        xy: { axes: ['filtered noise now', 'one sample earlier'], style: 'dots', diagonal: true } },
+        xy: { axes: ['filtered noise now', 'one sample earlier'], style: 'dots' } },
       2: { monitors: ['scope', 'spectrum', 'cv', 'xy'], indicators: ['entropy'],
-        xy: { axes: ['pitch CV now', '25 ms earlier (±1 = ±3 oct)'], style: 'dots', diagonal: true },
+        xy: { axes: ['pitch CV now', '25 ms earlier (±1 = ±3 oct)'], style: 'dots' },
            cvLabel: 'Pitch CV sent to the voice · last 4 s · ±1 = ±3 octaves' }
     },
     topics: [

@@ -16,6 +16,7 @@ const SCALE_NAMES = SCALE_CHOICES.map(choice => choice.name);
 const when = (control, id, values) => ({ ...control, visibleWhen: { id, in: values } });
 // Controls next to each other with the same `group` are drawn together in a titled box.
 const SINE = 'Sine Oscillator';
+const QUANTIZER = 'Quantizer';  // the switch and its Scale selector always stay together
 const TWIN_PEAK = 'Twin Peak Filter';
 const RUNGLER_DESTINATIONS = 'Rungler Destinations';
 const SH_DESTINATIONS = 'S&H Destinations';
@@ -35,8 +36,8 @@ const stages = [
     { ...knob('0B.clock', 'Clock rate', .1, 100, 10, 'Hz', 'log', .01), led: true },
     { ...knob('0B.depth', 'Pitch CV amount', 0, 3, 3, 'oct'), group: SINE },
     { ...knob('0B.center', 'Centre pitch', 55, 880, 440, 'Hz', 'log', 1), group: SINE },
-    toggle('0B.quantize', 'Quantizer'),
-    when(select('0B.scale', 'Scale', SCALE_NAMES, 1), '0B.quantize', [1])
+    { ...toggle('0B.quantize', 'Quantize'), group: QUANTIZER },
+    when({ ...select('0B.scale', 'Scale', SCALE_NAMES, 1), group: QUANTIZER }, '0B.quantize', [1])
   ] },
   { id: '1', title: 'The core Rungler', category: 'RECURSIVE', implemented: true,
     description: 'The Rungler takes the place of the sample & hold of 0b, one change at a time. Register: OSC2 (CLOCK) shifts an 8-bit register that stores the square of OSC1 (DATA); its last three bits set the pitch of the same sine voice. Loop: XOR re-reads the last bit. Feedback: the Rungler voltage moves the two oscillators.', parameters: [
@@ -47,8 +48,8 @@ const stages = [
     // The voice, as in 0b
     { ...knob('1.range', 'Pitch CV amount', 0, 3, 2.77, 'oct'), group: SINE },
     { ...knob('1.center', 'Centre pitch', 55, 880, 330, 'Hz', 'log', 1), group: SINE },
-    toggle('1.quantize', 'Quantizer'),
-    when(select('1.scale', 'Scale', SCALE_NAMES, 1), '1.quantize', [1]),
+    { ...toggle('1.quantize', 'Quantize'), group: QUANTIZER },
+    when({ ...select('1.scale', 'Scale', SCALE_NAMES, 1), group: QUANTIZER }, '1.quantize', [1]),
     // Step 2 · Loop
     when(toggle('1.xor', 'XOR with last bit', 1), '1.step', [1, 2]),
     // Step 3 · Feedback
