@@ -131,11 +131,14 @@ export const STAGE_NOTES = {
     modes: {
       by: '4.step',
       0: { monitors: ['scope', 'spectrum', 'cv', 'xy', 'events', 'register'], indicators: ['entropy'],
-           eventLabel: 'Rungler A level at clock n → n+1 (five levels, 0 … 4)' },
+           eventLabel: 'Rungler A level at clock n → n+1 (five levels, 0 … 4)',
+           cvLabel: 'Rungler A, before the destination knobs · last 4 s · −1 … +1' },
       1: { monitors: ['scope', 'spectrum', 'cv', 'xy', 'events', 'register'], indicators: ['entropy'],
-           eventLabel: 'S&H value at trigger n → n+1 (−1 … +1)' },
+           eventLabel: 'S&H value at trigger n → n+1 (−1 … +1)',
+           cvLabel: 'S&H output, before the destination knobs · last 4 s · −1 … +1' },
       2: { monitors: ['scope', 'spectrum', 'cv', 'xy', 'events', 'register'], indicators: ['entropy'],
-           eventLabel: 'S&H value at trigger n → n+1 (−1 … +1)' }
+           eventLabel: 'S&H value at trigger n → n+1 (−1 … +1)',
+           cvLabel: 'S&H output, before the destination knobs · last 4 s · −1 … +1' }
     },
     topics: [
       { about: 'stage', modes: [0], title: 'From stage 3 to the Blippoo Box: two Runglers',
